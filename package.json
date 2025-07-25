@@ -14,17 +14,19 @@
     "docgen": "npx projen docgen",
     "eject": "npx projen eject",
     "eslint": "npx projen eslint",
+    "major": "npx projen major",
+    "minor": "npx projen minor",
     "package": "npx projen package",
     "package-all": "npx projen package-all",
     "package:js": "npx projen package:js",
+    "package:python": "npx projen package:python",
+    "patch": "npx projen patch",
     "post-compile": "npx projen post-compile",
-    "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
     "release": "npx projen release",
     "test": "npx projen test",
     "test:watch": "npx projen test:watch",
     "unbump": "npx projen unbump",
-    "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen"
   },
@@ -36,12 +38,11 @@
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.1.0",
+    "@types/node": "^22",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk-lib": "2.1.0",
     "commit-and-tag-version": "^12",
-    "constructs": "10.0.5",
+    "esbuild": "^0.25.8",
     "eslint": "^9",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
@@ -61,9 +62,16 @@
     "aws-cdk-lib": "^2.1.0",
     "constructs": "^10.0.5"
   },
+  "dependencies": {
+    "aws-cdk-lib": "^2.207.0",
+    "constructs": "^10.4.2"
+  },
   "keywords": [
     "cdk"
   ],
+  "engines": {
+    "node": ">= 22.0.0"
+  },
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "publishConfig": {
@@ -116,10 +124,15 @@
     }
   },
   "types": "lib/index.d.ts",
-  "stability": "stable",
+  "stability": "experimental",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "python": {
+        "distName": "spensireli.advanced-cdk-constructs",
+        "module": "spensireli.advanced_cdk_constructs"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"

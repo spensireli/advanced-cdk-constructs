@@ -1,5 +1,1 @@
-export class Hello {
-  public sayHello() {
-    return 'hello, world!';
-  }
-}
+export { GuardDutyConstruct, GuardDutyConstructProps } from './guard-duty/guard-duty';
