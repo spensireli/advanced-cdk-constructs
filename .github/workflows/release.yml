@@ -31,9 +31,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.20.4
+          node-version-file: '.nvmrc'
       - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
+        run: npm ci
       - name: release
         run: npx projen release
       - name: Upload coverage to Codecov
@@ -75,7 +75,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.20.4
+          node-version-file: '.nvmrc'
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
@@ -101,7 +101,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.20.4
+          node-version-file: '.nvmrc'
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
@@ -115,7 +115,7 @@ jobs:
         with:
           path: .repo
       - name: Install Dependencies
-        run: cd .repo && yarn install --check-files --frozen-lockfile
+        run: cd .repo && npm ci
       - name: Extract build artifact
         run: tar --strip-components=1 -xzvf dist/js/*.tgz -C .repo
       - name: Move build artifact out of the way
@@ -141,7 +141,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.20.4
+          node-version-file: '.nvmrc'
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
@@ -158,7 +158,7 @@ jobs:
         with:
           path: .repo
       - name: Install Dependencies
-        run: cd .repo && yarn install --check-files --frozen-lockfile
+        run: cd .repo && npm ci
       - name: Extract build artifact
         run: tar --strip-components=1 -xzvf dist/js/*.tgz -C .repo
       - name: Move build artifact out of the way
