@@ -34,7 +34,20 @@ jobs:
           node-version: '22.4.1'
       - name: Install dependencies
         run: npm ci
+      - name: Get version from package.json
+        id: get_version
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
+      - name: Check if version tag exists
+        id: check_tag
+        run: |
+          TAG="v${{ steps.get_version.outputs.version }}"
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG$"; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
       - name: release
+        if: steps.check_tag.outputs.exists == 'false'
         run: npx projen release
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5

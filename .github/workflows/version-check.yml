@@ -1,0 +1,73 @@
+name: Version Check
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get base version
+        id: base_version
+        run: |
+          git fetch origin main
+          git checkout origin/main -- package.json
+          echo "base_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Get PR version
+        id: pr_version
+        run: |
+          git checkout HEAD -- package.json
+          echo "pr_version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Check if version was bumped
+        id: version_check
+        run: |
+          BASE_VERSION="${{ steps.base_version.outputs.base_version }}"
+          PR_VERSION="${{ steps.pr_version.outputs.pr_version }}"
+          
+          echo "Base version: $BASE_VERSION"
+          echo "PR version: $PR_VERSION"
+          
+          if [ "$PR_VERSION" = "$BASE_VERSION" ]; then
+            echo "❌ Version was not bumped. Current version: $PR_VERSION"
+            echo "Please bump the version in package.json before merging."
+            exit 1
+          fi
+          
+          # Parse version components
+          IFS='.' read -r base_major base_minor base_patch <<< "$BASE_VERSION"
+          IFS='.' read -r pr_major pr_minor pr_patch <<< "$PR_VERSION"
+          
+          # Check if it's a valid semantic version bump
+          if [ "$pr_major" -gt "$base_major" ]; then
+            echo "✅ Major version bump: $BASE_VERSION → $PR_VERSION"
+          elif [ "$pr_major" -eq "$base_major" ] && [ "$pr_minor" -gt "$base_minor" ]; then
+            echo "✅ Minor version bump: $BASE_VERSION → $PR_VERSION"
+          elif [ "$pr_major" -eq "$base_major" ] && [ "$pr_minor" -eq "$base_minor" ] && [ "$pr_patch" -gt "$base_patch" ]; then
+            echo "✅ Patch version bump: $BASE_VERSION → $PR_VERSION"
+          else
+            echo "❌ Invalid version bump: $BASE_VERSION → $PR_VERSION"
+            echo "Version must be incremented according to semantic versioning rules."
+            exit 1
+          fi
+
+      - name: Validate version format
+        run: |
+          PR_VERSION="${{ steps.pr_version.outputs.pr_version }}"
+          
+          # Check if version follows semver format (x.y.z)
+          if [[ ! $PR_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ Invalid version format: $PR_VERSION"
+            echo "Version must follow semantic versioning format (e.g., 1.2.3)"
+            exit 1
+          fi
+          
+          echo "✅ Version format is valid: $PR_VERSION"

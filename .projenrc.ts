@@ -11,7 +11,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   stability: 'experimental',
   dependabot: true,
   codeCov: true,
-  release: true,
+  release: false, // I am controlling the release process manually
   releaseToNpm: true,
   minNodeVersion: '22.0.0',
   workflowNodeVersion: '22.0.0',
