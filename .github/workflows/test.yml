@@ -1,0 +1,23 @@
+name: test
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.1'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npx projen build
+      - name: Test
+        run: npx projen test
