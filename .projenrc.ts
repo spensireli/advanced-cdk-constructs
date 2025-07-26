@@ -17,7 +17,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   keywords: ['aws', 'cdk', 'aws-cdk', 'guardduty', 'guard', 'duty', 'security', 'advanced', 'constructs', 'advanced-cdk-constructs', 'organizations', 'landing-zone', 'landingzone', 'landing-zone-constructs', 'landingzoneconstructs', 'landing-zone-construct', 'landingzoneconstruct', 'control-tower', 'control', 'tower'],
   packageManager: javascript.NodePackageManager.NPM,
   npmAccess: javascript.NpmAccess.PUBLIC,
-  repositoryUrl: 'git@github.com:spensireli/advanced-cdk-constructs.git',
+  repositoryUrl: 'https://github.com/spensireli/advanced-cdk-constructs.git',
   depsUpgradeOptions: {
     workflowOptions: {
       labels: ['auto-approve', 'auto-merge'],

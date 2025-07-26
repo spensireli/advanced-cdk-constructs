@@ -2,7 +2,7 @@
   "name": "advanced-cdk-constructs",
   "repository": {
     "type": "git",
-    "url": "git@github.com:spensireli/advanced-cdk-constructs.git"
+    "url": "https://github.com/spensireli/advanced-cdk-constructs.git"
   },
   "scripts": {
     "build": "npx projen build",
