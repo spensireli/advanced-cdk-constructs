@@ -17,7 +17,5 @@ jobs:
           node-version: '22.4.1'
       - name: Install dependencies
         run: npm ci
-      - name: Build
-        run: npx projen build
       - name: Test
         run: npx projen test
