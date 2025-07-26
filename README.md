@@ -1,4 +1,5 @@
 # Advanced CDK Constructs
+[![codecov](https://codecov.io/gh/spensireli/advanced-cdk-constructs/graph/badge.svg?token=50IITI207T)](https://codecov.io/gh/spensireli/advanced-cdk-constructs)
 
 A collection of advanced AWS CDK constructs to simplify AWS. 
 
@@ -111,14 +112,14 @@ npm install
 
 3. Build the project:
 ```bash
-npm run build
+npx projen build
 ```
 
 ### Testing
 
 Run the test suite:
 ```bash
-npm test
+npx projen test
 ```
 
 ### Contributing
