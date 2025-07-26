@@ -2,22 +2,22 @@ import { aws_organizations as organizations } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 export interface ResourceControlPolicyProps {
-  readonly TargetIds: string[];
-  readonly SourceOrgID: string;
-  readonly Name?: string;
-  readonly SourceAccount?: string[];
-  readonly EnforceConfusedDeputyProtection: boolean;
-  readonly EnforceSecureTransport: boolean;
+  readonly targetIds: string[];
+  readonly sourceOrgID: string;
+  readonly name?: string;
+  readonly sourceAccount?: string[];
+  readonly enforceConfusedDeputyProtection: boolean;
+  readonly enforceSecureTransport: boolean;
 }
 
 export class ResourceControlPolicy extends Construct {
-  public readonly ResourceControlPolicyArn: string;
+  public readonly resourceControlPolicyArn!: string;
   constructor(scope: Construct, id: string, props: ResourceControlPolicyProps) {
     super(scope, id);
 
     const statements: any[] = [];
 
-    if (props.EnforceConfusedDeputyProtection) {
+    if (props.enforceConfusedDeputyProtection) {
       const EnforceDeputyProtectionStatement = {
         Sid: 'EnforceConfusedDeputyProtection',
         Effect: 'Deny',
@@ -32,8 +32,8 @@ export class ResourceControlPolicy extends Construct {
         Resource: '*',
         Condition: {
           StringNotEqualsIfExists: {
-            'aws:SourceOrgID': props.SourceOrgID,
-            ...(props.SourceAccount && { 'aws:SourceAccount': props.SourceAccount }),
+            'aws:SourceOrgID': props.sourceOrgID,
+            ...(props.sourceAccount && { 'aws:SourceAccount': props.sourceAccount }),
           },
           Bool: {
             'aws:PrincipalIsAWSService': 'true',
@@ -46,7 +46,7 @@ export class ResourceControlPolicy extends Construct {
       statements.push(EnforceDeputyProtectionStatement);
     }
 
-    if (props.EnforceSecureTransport) {
+    if (props.enforceSecureTransport) {
       const EnforceSecureTransportStatement = {
         Sid: 'EnforceSecureTransport',
         Effect: 'Deny',
@@ -74,12 +74,12 @@ export class ResourceControlPolicy extends Construct {
     };
     const applyResourceControlPolicy = new organizations.CfnPolicy(this, 'ResourceControlPolicy', {
       content: resourceControlPolicy,
-      name: props.Name ?? `ResourceControlPolicy-${this.node.id}`,
+      name: props.name ?? `ResourceControlPolicy-${this.node.id}`,
       type: 'RESOURCE_CONTROL_POLICY',
       description: 'Resource Control Policy from Advanced CDK Constructs',
-      targetIds: props.TargetIds,
+      targetIds: props.targetIds,
     });
-    this.ResourceControlPolicyArn = applyResourceControlPolicy.attrArn;
+    this.resourceControlPolicyArn = applyResourceControlPolicy.attrArn;
 
   }
 }
