@@ -19,27 +19,27 @@ describe('ResourceControlPolicy Construct Testing', () => {
   describe('Basic Instantiation', () => {
     it('Should create ResourceControlPolicy instance with minimal props', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        EnforceConfusedDeputyProtection: true,
-        EnforceSecureTransport: true,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        enforceConfusedDeputyProtection: true,
+        enforceSecureTransport: true,
       };
 
       const resourceControlPolicy = new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
 
       expect(resourceControlPolicy).toBeInstanceOf(ResourceControlPolicy);
-      expect(resourceControlPolicy.ResourceControlPolicyArn).toBeDefined();
+      expect(resourceControlPolicy.resourceControlPolicyArn).toBeDefined();
 
       Annotations.fromStack(stack).hasNoError('*', Match.stringLikeRegexp('.*'));
     });
 
     it('Should create ResourceControlPolicy with custom name', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        Name: 'CustomResourceControlPolicy',
-        EnforceConfusedDeputyProtection: true,
-        EnforceSecureTransport: true,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        name: 'CustomResourceControlPolicy',
+        enforceConfusedDeputyProtection: true,
+        enforceSecureTransport: true,
       };
 
       const resourceControlPolicy = new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
@@ -53,11 +53,11 @@ describe('ResourceControlPolicy Construct Testing', () => {
   describe('AWS Organizations Policy Resource', () => {
     it('Should create AWS::Organizations::Policy with correct properties', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        Name: 'TestResourceControlPolicy',
-        EnforceConfusedDeputyProtection: true,
-        EnforceSecureTransport: true,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        name: 'TestResourceControlPolicy',
+        enforceConfusedDeputyProtection: true,
+        enforceSecureTransport: true,
       };
 
       new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
@@ -92,10 +92,10 @@ describe('ResourceControlPolicy Construct Testing', () => {
 
     it('Should generate default name when not provided', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        EnforceConfusedDeputyProtection: true,
-        EnforceSecureTransport: true,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        enforceConfusedDeputyProtection: true,
+        enforceSecureTransport: true,
       };
 
       new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
@@ -110,10 +110,10 @@ describe('ResourceControlPolicy Construct Testing', () => {
   describe('Policy Statements Configuration', () => {
     it('Should include EnforceConfusedDeputyProtection statement when enabled', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        EnforceConfusedDeputyProtection: true,
-        EnforceSecureTransport: false,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        enforceConfusedDeputyProtection: true,
+        enforceSecureTransport: false,
       };
 
       new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
@@ -144,10 +144,10 @@ describe('ResourceControlPolicy Construct Testing', () => {
 
     it('Should include EnforceSecureTransport statement when enabled', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        EnforceConfusedDeputyProtection: false,
-        EnforceSecureTransport: true,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        enforceConfusedDeputyProtection: false,
+        enforceSecureTransport: true,
       };
 
       new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
@@ -172,10 +172,10 @@ describe('ResourceControlPolicy Construct Testing', () => {
 
     it('Should include both statements when both are enabled', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        EnforceConfusedDeputyProtection: true,
-        EnforceSecureTransport: true,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        enforceConfusedDeputyProtection: true,
+        enforceSecureTransport: true,
       };
 
       new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
@@ -197,11 +197,11 @@ describe('ResourceControlPolicy Construct Testing', () => {
 
     it('Should include SourceAccount condition when provided', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        SourceAccount: ['123456789012', '098765432109'],
-        EnforceConfusedDeputyProtection: true,
-        EnforceSecureTransport: false,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        sourceAccount: ['123456789012', '098765432109'],
+        enforceConfusedDeputyProtection: true,
+        enforceSecureTransport: false,
       };
 
       new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
@@ -227,10 +227,10 @@ describe('ResourceControlPolicy Construct Testing', () => {
   describe('Edge Cases', () => {
     it('Should handle empty statements array when both protections are disabled', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890'],
-        SourceOrgID: 'o-1234567890',
-        EnforceConfusedDeputyProtection: false,
-        EnforceSecureTransport: false,
+        targetIds: ['o-1234567890'],
+        sourceOrgID: 'o-1234567890',
+        enforceConfusedDeputyProtection: false,
+        enforceSecureTransport: false,
       };
 
       new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
@@ -245,10 +245,10 @@ describe('ResourceControlPolicy Construct Testing', () => {
 
     it('Should handle multiple target IDs', () => {
       const props: ResourceControlPolicyProps = {
-        TargetIds: ['o-1234567890', 'o-0987654321'],
-        SourceOrgID: 'o-1234567890',
-        EnforceConfusedDeputyProtection: true,
-        EnforceSecureTransport: true,
+        targetIds: ['o-1234567890', 'o-0987654321'],
+        sourceOrgID: 'o-1234567890',
+        enforceConfusedDeputyProtection: true,
+        enforceSecureTransport: true,
       };
 
       new ResourceControlPolicy(stack, 'ResourceControlPolicyTest', props);
