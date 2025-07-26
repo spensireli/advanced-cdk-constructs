@@ -153,22 +153,6 @@
         }
       ]
     },
-    "major": {
-      "name": "major",
-      "steps": [
-        {
-          "exec": "npm version major"
-        }
-      ]
-    },
-    "minor": {
-      "name": "minor",
-      "steps": [
-        {
-          "exec": "npm version minor"
-        }
-      ]
-    },
     "package": {
       "name": "package",
       "description": "Creates the distribution package",
@@ -210,14 +194,6 @@
       "steps": [
         {
           "exec": "jsii-pacmak -v --target python"
-        }
-      ]
-    },
-    "patch": {
-      "name": "patch",
-      "steps": [
-        {
-          "exec": "npm version patch"
         }
       ]
     },

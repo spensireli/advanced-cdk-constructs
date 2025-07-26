@@ -55,16 +55,4 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
 });
 
-project.addTask('minor', {
-  exec: 'npm version minor',
-});
-
-project.addTask('major', {
-  exec: 'npm version major',
-});
-
-project.addTask('patch', {
-  exec: 'npm version patch',
-});
-
 project.synth();
