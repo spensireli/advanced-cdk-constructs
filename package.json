@@ -67,7 +67,26 @@
     "constructs": "^10.4.2"
   },
   "keywords": [
-    "cdk"
+    "advanced",
+    "advanced-cdk-constructs",
+    "aws",
+    "aws-cdk",
+    "cdk",
+    "constructs",
+    "control",
+    "control-tower",
+    "duty",
+    "guard",
+    "guardduty",
+    "landing-zone",
+    "landing-zone-construct",
+    "landing-zone-constructs",
+    "landingzone",
+    "landingzoneconstruct",
+    "landingzoneconstructs",
+    "organizations",
+    "security",
+    "tower"
   ],
   "engines": {
     "node": ">= 22.0.0"
