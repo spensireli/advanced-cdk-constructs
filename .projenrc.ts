@@ -32,6 +32,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'esbuild',
     'typescript',
     'ts-jest',
+    'jest',
+    'cdk-nag',
   ],
   autoApproveOptions: {
     secret: 'GITHUB_TOKEN',
@@ -44,6 +46,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   jestOptions: {
     coverage: true,
   },
+  testdir: 'test',
   gitignore: [
     'node_modules/',
     '.DS_Store',
@@ -62,4 +65,5 @@ project.addTask('major', {
 project.addTask('patch', {
   exec: 'npm version patch',
 });
+
 project.synth();
