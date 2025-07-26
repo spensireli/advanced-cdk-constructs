@@ -11,7 +11,7 @@ on:
       - ready_for_review
 jobs:
   approve:
-    runs-on: ubuntu-latest
+    runs-on: cdk
     permissions:
       pull-requests: write
     if: contains(github.event.pull_request.labels.*.name, 'auto-approve') && (github.event.pull_request.user.login == 'spensireli')
