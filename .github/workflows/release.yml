@@ -94,7 +94,7 @@ jobs:
   release_npm:
     name: Publish to npm
     needs: release
-    runs-on: cdk
+    runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
