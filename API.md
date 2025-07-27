@@ -4,6 +4,21 @@
 
 ### DeclarativePolicy <a name="DeclarativePolicy" id="advanced-cdk-constructs.DeclarativePolicy"></a>
 
+A CDK construct that creates an AWS Organizations EC2 Declarative Policy.
+
+This construct allows you to declaratively define and apply EC2-related policies
+such as blocking public access to VPCs, restricting AMI providers, enforcing
+instance metadata service settings, and more.
+
+Example:
+```ts
+new DeclarativePolicy(this, 'MyPolicy', {
+  targetIds: ['ou-xxxx-xxxxxxxx'],
+  vpcBlockPublicAccess: true,
+  vpcBlockPublicAccessMode: VpcBlockPublicAccessMode.BLOCK_BIDIRECTIONAL,
+});
+```
+
 #### Initializers <a name="Initializers" id="advanced-cdk-constructs.DeclarativePolicy.Initializer"></a>
 
 ```typescript
@@ -14,9 +29,9 @@ new DeclarativePolicy(scope: Construct, id: string, props: DeclarativePolicyProp
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicy.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps">DeclarativePolicyProps</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | The parent construct. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | The construct ID. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicy.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps">DeclarativePolicyProps</a></code> | The policy properties. |
 
 ---
 
@@ -24,17 +39,23 @@ new DeclarativePolicy(scope: Construct, id: string, props: DeclarativePolicyProp
 
 - *Type:* constructs.Construct
 
+The parent construct.
+
 ---
 
 ##### `id`<sup>Required</sup> <a name="id" id="advanced-cdk-constructs.DeclarativePolicy.Initializer.parameter.id"></a>
 
 - *Type:* string
 
+The construct ID.
+
 ---
 
 ##### `props`<sup>Required</sup> <a name="props" id="advanced-cdk-constructs.DeclarativePolicy.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#advanced-cdk-constructs.DeclarativePolicyProps">DeclarativePolicyProps</a>
+
+The policy properties.
 
 ---
 
@@ -99,7 +120,7 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#advanced-cdk-constructs.DeclarativePolicy.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicy.property.declarativePolicyArn">declarativePolicyArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicy.property.declarativePolicyArn">declarativePolicyArn</a></code> | <code>string</code> | The ARN of the created declarative policy. |
 
 ---
 
@@ -123,10 +144,24 @@ public readonly declarativePolicyArn: string;
 
 - *Type:* string
 
+The ARN of the created declarative policy.
+
 ---
 
 
 ### GuardDutyConstruct <a name="GuardDutyConstruct" id="advanced-cdk-constructs.GuardDutyConstruct"></a>
+
+A CDK construct that sets up AWS GuardDuty with configurable data sources and features.
+
+Example:
+```ts
+new GuardDutyConstruct(this, 'GuardDuty', {
+  enableGuardDuty: true,
+  kubernetesAuditLogs: true,
+  malwareProtection: true,
+  s3Logs: true,
+});
+```
 
 #### Initializers <a name="Initializers" id="advanced-cdk-constructs.GuardDutyConstruct.Initializer"></a>
 
@@ -138,9 +173,9 @@ new GuardDutyConstruct(scope: Construct, id: string, props?: GuardDutyConstructP
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps">GuardDutyConstructProps</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | The parent construct. |
+| <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.Initializer.parameter.id">id</a></code> | <code>string</code> | The construct ID. |
+| <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps">GuardDutyConstructProps</a></code> | GuardDuty configuration properties. |
 
 ---
 
@@ -148,17 +183,23 @@ new GuardDutyConstruct(scope: Construct, id: string, props?: GuardDutyConstructP
 
 - *Type:* constructs.Construct
 
+The parent construct.
+
 ---
 
 ##### `id`<sup>Required</sup> <a name="id" id="advanced-cdk-constructs.GuardDutyConstruct.Initializer.parameter.id"></a>
 
 - *Type:* string
 
+The construct ID.
+
 ---
 
 ##### `props`<sup>Optional</sup> <a name="props" id="advanced-cdk-constructs.GuardDutyConstruct.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#advanced-cdk-constructs.GuardDutyConstructProps">GuardDutyConstructProps</a>
+
+GuardDuty configuration properties.
 
 ---
 
@@ -223,7 +264,7 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.property.detectorId">detectorId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.GuardDutyConstruct.property.detectorId">detectorId</a></code> | <code>string</code> | The ID of the created GuardDuty detector. |
 
 ---
 
@@ -247,10 +288,17 @@ public readonly detectorId: string;
 
 - *Type:* string
 
+The ID of the created GuardDuty detector.
+
 ---
 
 
 ### ResourceControlPolicy <a name="ResourceControlPolicy" id="advanced-cdk-constructs.ResourceControlPolicy"></a>
+
+A CDK construct that creates and attaches an AWS Organizations Resource Control Policy.
+
+This policy can enforce Confused Deputy Protection and Secure Transport requirements
+across specified AWS accounts, OUs, or roots.
 
 #### Initializers <a name="Initializers" id="advanced-cdk-constructs.ResourceControlPolicy.Initializer"></a>
 
@@ -262,9 +310,9 @@ new ResourceControlPolicy(scope: Construct, id: string, props: ResourceControlPo
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps">ResourceControlPolicyProps</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | The parent construct. |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | The construct ID. |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps">ResourceControlPolicyProps</a></code> | The properties for the resource control policy. |
 
 ---
 
@@ -272,17 +320,23 @@ new ResourceControlPolicy(scope: Construct, id: string, props: ResourceControlPo
 
 - *Type:* constructs.Construct
 
+The parent construct.
+
 ---
 
 ##### `id`<sup>Required</sup> <a name="id" id="advanced-cdk-constructs.ResourceControlPolicy.Initializer.parameter.id"></a>
 
 - *Type:* string
 
+The construct ID.
+
 ---
 
 ##### `props`<sup>Required</sup> <a name="props" id="advanced-cdk-constructs.ResourceControlPolicy.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#advanced-cdk-constructs.ResourceControlPolicyProps">ResourceControlPolicyProps</a>
+
+The properties for the resource control policy.
 
 ---
 
@@ -347,7 +401,7 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.property.resourceControlPolicyArn">resourceControlPolicyArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicy.property.resourceControlPolicyArn">resourceControlPolicyArn</a></code> | <code>string</code> | The ARN of the created Resource Control Policy. |
 
 ---
 
@@ -371,10 +425,30 @@ public readonly resourceControlPolicyArn: string;
 
 - *Type:* string
 
+The ARN of the created Resource Control Policy.
+
 ---
 
 
 ### ServiceControlPolicy <a name="ServiceControlPolicy" id="advanced-cdk-constructs.ServiceControlPolicy"></a>
+
+Defines an AWS Organizations Service Control Policy (SCP) and attaches it to the specified targets.
+
+Example:
+```ts
+new ServiceControlPolicy(this, 'MySCP', {
+  targetIds: ['ou-xxxx-xxxxxxxx', '123456789012'],
+  name: 'DenyEC2',
+  statements: [
+    {
+      Effect: 'Deny',
+      Action: 'ec2:*',
+      Resource: '*',
+    },
+  ],
+  description: 'Denies all EC2 actions',
+});
+```
 
 #### Initializers <a name="Initializers" id="advanced-cdk-constructs.ServiceControlPolicy.Initializer"></a>
 
@@ -386,9 +460,9 @@ new ServiceControlPolicy(scope: Construct, id: string, props: ServiceControlPoli
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps">ServiceControlPolicyProps</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | The parent construct. |
+| <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.Initializer.parameter.id">id</a></code> | <code>string</code> | The construct ID. |
+| <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps">ServiceControlPolicyProps</a></code> | The Service Control Policy properties. |
 
 ---
 
@@ -396,17 +470,23 @@ new ServiceControlPolicy(scope: Construct, id: string, props: ServiceControlPoli
 
 - *Type:* constructs.Construct
 
+The parent construct.
+
 ---
 
 ##### `id`<sup>Required</sup> <a name="id" id="advanced-cdk-constructs.ServiceControlPolicy.Initializer.parameter.id"></a>
 
 - *Type:* string
 
+The construct ID.
+
 ---
 
 ##### `props`<sup>Required</sup> <a name="props" id="advanced-cdk-constructs.ServiceControlPolicy.Initializer.parameter.props"></a>
 
 - *Type:* <a href="#advanced-cdk-constructs.ServiceControlPolicyProps">ServiceControlPolicyProps</a>
+
+The Service Control Policy properties.
 
 ---
 
@@ -471,7 +551,7 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.property.serviceControlPolicyArn">serviceControlPolicyArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.ServiceControlPolicy.property.serviceControlPolicyArn">serviceControlPolicyArn</a></code> | <code>string</code> | The ARN of the created Service Control Policy. |
 
 ---
 
@@ -495,12 +575,16 @@ public readonly serviceControlPolicyArn: string;
 
 - *Type:* string
 
+The ARN of the created Service Control Policy.
+
 ---
 
 
 ## Structs <a name="Structs" id="Structs"></a>
 
 ### DeclarativePolicyProps <a name="DeclarativePolicyProps" id="advanced-cdk-constructs.DeclarativePolicyProps"></a>
+
+Properties for configuring a DeclarativePolicy.
 
 #### Initializer <a name="Initializer" id="advanced-cdk-constructs.DeclarativePolicyProps.Initializer"></a>
 
@@ -514,23 +598,23 @@ const declarativePolicyProps: DeclarativePolicyProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.allowedImageProviders">allowedImageProviders</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.allowedImagesState">allowedImagesState</a></code> | <code><a href="#advanced-cdk-constructs.AllowedImagesState">AllowedImagesState</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.blockPublicSnapshots">blockPublicSnapshots</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.disableSerialConsoleAccess">disableSerialConsoleAccess</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.httpEndpoint">httpEndpoint</a></code> | <code><a href="#advanced-cdk-constructs.HttpEndpoint">HttpEndpoint</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.httpPutResponseHopLimit">httpPutResponseHopLimit</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.httpTokens">httpTokens</a></code> | <code><a href="#advanced-cdk-constructs.HttpTokens">HttpTokens</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.imageBlockPublicAccess">imageBlockPublicAccess</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.instanceMetadataDefaults">instanceMetadataDefaults</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.instanceMetadataTags">instanceMetadataTags</a></code> | <code><a href="#advanced-cdk-constructs.InstanceMetadataTags">InstanceMetadataTags</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.restrictImageProviders">restrictImageProviders</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.snapshotBlockPublicAccessState">snapshotBlockPublicAccessState</a></code> | <code><a href="#advanced-cdk-constructs.SnapshotBlockPublicAccessState">SnapshotBlockPublicAccessState</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.vpcBlockPublicAccess">vpcBlockPublicAccess</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.vpcBlockPublicAccessMode">vpcBlockPublicAccessMode</a></code> | <code><a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode">VpcBlockPublicAccessMode</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | The target AWS account or organizational unit IDs to which the policy will be attached. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.allowedImageProviders">allowedImageProviders</a></code> | <code>string[]</code> | The list of allowed image providers or AWS account IDs. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.allowedImagesState">allowedImagesState</a></code> | <code><a href="#advanced-cdk-constructs.AllowedImagesState">AllowedImagesState</a></code> | The state for allowed images policy. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.blockPublicSnapshots">blockPublicSnapshots</a></code> | <code>boolean</code> | Whether to block public sharing of EBS snapshots. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.description">description</a></code> | <code>string</code> | The description of the policy. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.disableSerialConsoleAccess">disableSerialConsoleAccess</a></code> | <code>boolean</code> | Whether to disable serial console access. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.httpEndpoint">httpEndpoint</a></code> | <code><a href="#advanced-cdk-constructs.HttpEndpoint">HttpEndpoint</a></code> | The HttpEndpoint setting for instance metadata service. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.httpPutResponseHopLimit">httpPutResponseHopLimit</a></code> | <code>number</code> | The hop limit for HTTP PUT responses from the instance metadata service. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.httpTokens">httpTokens</a></code> | <code><a href="#advanced-cdk-constructs.HttpTokens">HttpTokens</a></code> | The HttpTokens setting for instance metadata service. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.imageBlockPublicAccess">imageBlockPublicAccess</a></code> | <code>boolean</code> | Whether to block public access to AMIs. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.instanceMetadataDefaults">instanceMetadataDefaults</a></code> | <code>boolean</code> | Whether to enforce instance metadata service defaults. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.instanceMetadataTags">instanceMetadataTags</a></code> | <code><a href="#advanced-cdk-constructs.InstanceMetadataTags">InstanceMetadataTags</a></code> | The instance metadata tags setting. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.name">name</a></code> | <code>string</code> | The name of the policy. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.restrictImageProviders">restrictImageProviders</a></code> | <code>boolean</code> | Whether to restrict allowed image providers. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.snapshotBlockPublicAccessState">snapshotBlockPublicAccessState</a></code> | <code><a href="#advanced-cdk-constructs.SnapshotBlockPublicAccessState">SnapshotBlockPublicAccessState</a></code> | The state for blocking public access to EBS snapshots. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.vpcBlockPublicAccess">vpcBlockPublicAccess</a></code> | <code>boolean</code> | Whether to block public access to VPCs. |
+| <code><a href="#advanced-cdk-constructs.DeclarativePolicyProps.property.vpcBlockPublicAccessMode">vpcBlockPublicAccessMode</a></code> | <code><a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode">VpcBlockPublicAccessMode</a></code> | The mode for blocking public access to VPCs. |
 
 ---
 
@@ -542,6 +626,8 @@ public readonly targetIds: string[];
 
 - *Type:* string[]
 
+The target AWS account or organizational unit IDs to which the policy will be attached.
+
 ---
 
 ##### `allowedImageProviders`<sup>Optional</sup> <a name="allowedImageProviders" id="advanced-cdk-constructs.DeclarativePolicyProps.property.allowedImageProviders"></a>
@@ -551,6 +637,8 @@ public readonly allowedImageProviders: string[];
 ```
 
 - *Type:* string[]
+
+The list of allowed image providers or AWS account IDs.
 
 ---
 
@@ -562,6 +650,8 @@ public readonly allowedImagesState: AllowedImagesState;
 
 - *Type:* <a href="#advanced-cdk-constructs.AllowedImagesState">AllowedImagesState</a>
 
+The state for allowed images policy.
+
 ---
 
 ##### `blockPublicSnapshots`<sup>Optional</sup> <a name="blockPublicSnapshots" id="advanced-cdk-constructs.DeclarativePolicyProps.property.blockPublicSnapshots"></a>
@@ -571,6 +661,8 @@ public readonly blockPublicSnapshots: boolean;
 ```
 
 - *Type:* boolean
+
+Whether to block public sharing of EBS snapshots.
 
 ---
 
@@ -582,6 +674,8 @@ public readonly description: string;
 
 - *Type:* string
 
+The description of the policy.
+
 ---
 
 ##### `disableSerialConsoleAccess`<sup>Optional</sup> <a name="disableSerialConsoleAccess" id="advanced-cdk-constructs.DeclarativePolicyProps.property.disableSerialConsoleAccess"></a>
@@ -591,6 +685,8 @@ public readonly disableSerialConsoleAccess: boolean;
 ```
 
 - *Type:* boolean
+
+Whether to disable serial console access.
 
 ---
 
@@ -602,6 +698,8 @@ public readonly httpEndpoint: HttpEndpoint;
 
 - *Type:* <a href="#advanced-cdk-constructs.HttpEndpoint">HttpEndpoint</a>
 
+The HttpEndpoint setting for instance metadata service.
+
 ---
 
 ##### `httpPutResponseHopLimit`<sup>Optional</sup> <a name="httpPutResponseHopLimit" id="advanced-cdk-constructs.DeclarativePolicyProps.property.httpPutResponseHopLimit"></a>
@@ -611,6 +709,8 @@ public readonly httpPutResponseHopLimit: number;
 ```
 
 - *Type:* number
+
+The hop limit for HTTP PUT responses from the instance metadata service.
 
 ---
 
@@ -622,6 +722,8 @@ public readonly httpTokens: HttpTokens;
 
 - *Type:* <a href="#advanced-cdk-constructs.HttpTokens">HttpTokens</a>
 
+The HttpTokens setting for instance metadata service.
+
 ---
 
 ##### `imageBlockPublicAccess`<sup>Optional</sup> <a name="imageBlockPublicAccess" id="advanced-cdk-constructs.DeclarativePolicyProps.property.imageBlockPublicAccess"></a>
@@ -631,6 +733,8 @@ public readonly imageBlockPublicAccess: boolean;
 ```
 
 - *Type:* boolean
+
+Whether to block public access to AMIs.
 
 ---
 
@@ -642,6 +746,8 @@ public readonly instanceMetadataDefaults: boolean;
 
 - *Type:* boolean
 
+Whether to enforce instance metadata service defaults.
+
 ---
 
 ##### `instanceMetadataTags`<sup>Optional</sup> <a name="instanceMetadataTags" id="advanced-cdk-constructs.DeclarativePolicyProps.property.instanceMetadataTags"></a>
@@ -651,6 +757,8 @@ public readonly instanceMetadataTags: InstanceMetadataTags;
 ```
 
 - *Type:* <a href="#advanced-cdk-constructs.InstanceMetadataTags">InstanceMetadataTags</a>
+
+The instance metadata tags setting.
 
 ---
 
@@ -662,6 +770,8 @@ public readonly name: string;
 
 - *Type:* string
 
+The name of the policy.
+
 ---
 
 ##### `restrictImageProviders`<sup>Optional</sup> <a name="restrictImageProviders" id="advanced-cdk-constructs.DeclarativePolicyProps.property.restrictImageProviders"></a>
@@ -671,6 +781,8 @@ public readonly restrictImageProviders: boolean;
 ```
 
 - *Type:* boolean
+
+Whether to restrict allowed image providers.
 
 ---
 
@@ -682,6 +794,8 @@ public readonly snapshotBlockPublicAccessState: SnapshotBlockPublicAccessState;
 
 - *Type:* <a href="#advanced-cdk-constructs.SnapshotBlockPublicAccessState">SnapshotBlockPublicAccessState</a>
 
+The state for blocking public access to EBS snapshots.
+
 ---
 
 ##### `vpcBlockPublicAccess`<sup>Optional</sup> <a name="vpcBlockPublicAccess" id="advanced-cdk-constructs.DeclarativePolicyProps.property.vpcBlockPublicAccess"></a>
@@ -691,6 +805,8 @@ public readonly vpcBlockPublicAccess: boolean;
 ```
 
 - *Type:* boolean
+
+Whether to block public access to VPCs.
 
 ---
 
@@ -702,9 +818,13 @@ public readonly vpcBlockPublicAccessMode: VpcBlockPublicAccessMode;
 
 - *Type:* <a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode">VpcBlockPublicAccessMode</a>
 
+The mode for blocking public access to VPCs.
+
 ---
 
 ### GuardDutyConstructProps <a name="GuardDutyConstructProps" id="advanced-cdk-constructs.GuardDutyConstructProps"></a>
+
+Properties for configuring {@link GuardDutyConstruct}.
 
 #### Initializer <a name="Initializer" id="advanced-cdk-constructs.GuardDutyConstructProps.Initializer"></a>
 
@@ -718,10 +838,10 @@ const guardDutyConstructProps: GuardDutyConstructProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps.property.enableGuardDuty">enableGuardDuty</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps.property.kubernetesAuditLogs">kubernetesAuditLogs</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps.property.malwareProtection">malwareProtection</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps.property.s3Logs">s3Logs</a></code> | <code>boolean</code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps.property.enableGuardDuty">enableGuardDuty</a></code> | <code>boolean</code> | Whether to enable GuardDuty. |
+| <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps.property.kubernetesAuditLogs">kubernetesAuditLogs</a></code> | <code>boolean</code> | Whether to enable Kubernetes audit logs as a GuardDuty data source. |
+| <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps.property.malwareProtection">malwareProtection</a></code> | <code>boolean</code> | Whether to enable malware protection (EC2 EBS volume scanning). |
+| <code><a href="#advanced-cdk-constructs.GuardDutyConstructProps.property.s3Logs">s3Logs</a></code> | <code>boolean</code> | Whether to enable S3 logs as a GuardDuty data source. |
 
 ---
 
@@ -732,6 +852,9 @@ public readonly enableGuardDuty: boolean;
 ```
 
 - *Type:* boolean
+- *Default:* true
+
+Whether to enable GuardDuty.
 
 ---
 
@@ -742,6 +865,9 @@ public readonly kubernetesAuditLogs: boolean;
 ```
 
 - *Type:* boolean
+- *Default:* true
+
+Whether to enable Kubernetes audit logs as a GuardDuty data source.
 
 ---
 
@@ -752,6 +878,9 @@ public readonly malwareProtection: boolean;
 ```
 
 - *Type:* boolean
+- *Default:* true
+
+Whether to enable malware protection (EC2 EBS volume scanning).
 
 ---
 
@@ -762,10 +891,15 @@ public readonly s3Logs: boolean;
 ```
 
 - *Type:* boolean
+- *Default:* true
+
+Whether to enable S3 logs as a GuardDuty data source.
 
 ---
 
 ### ResourceControlPolicyProps <a name="ResourceControlPolicyProps" id="advanced-cdk-constructs.ResourceControlPolicyProps"></a>
+
+Properties for configuring a {@link ResourceControlPolicy}.
 
 #### Initializer <a name="Initializer" id="advanced-cdk-constructs.ResourceControlPolicyProps.Initializer"></a>
 
@@ -779,12 +913,12 @@ const resourceControlPolicyProps: ResourceControlPolicyProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.enforceConfusedDeputyProtection">enforceConfusedDeputyProtection</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.enforceSecureTransport">enforceSecureTransport</a></code> | <code>boolean</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.sourceOrgID">sourceOrgID</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.name">name</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.sourceAccount">sourceAccount</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.enforceConfusedDeputyProtection">enforceConfusedDeputyProtection</a></code> | <code>boolean</code> | Whether to enforce Confused Deputy Protection in the policy. |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.enforceSecureTransport">enforceSecureTransport</a></code> | <code>boolean</code> | Whether to enforce Secure Transport in the policy. |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.sourceOrgID">sourceOrgID</a></code> | <code>string</code> | The AWS Organization ID to enforce as the source organization in the policy. |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | The list of target IDs (accounts, OUs, or roots) to which the policy will be attached. |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.name">name</a></code> | <code>string</code> | The name of the resource control policy. |
+| <code><a href="#advanced-cdk-constructs.ResourceControlPolicyProps.property.sourceAccount">sourceAccount</a></code> | <code>string[]</code> | Optional list of allowed source AWS account IDs. |
 
 ---
 
@@ -796,6 +930,8 @@ public readonly enforceConfusedDeputyProtection: boolean;
 
 - *Type:* boolean
 
+Whether to enforce Confused Deputy Protection in the policy.
+
 ---
 
 ##### `enforceSecureTransport`<sup>Required</sup> <a name="enforceSecureTransport" id="advanced-cdk-constructs.ResourceControlPolicyProps.property.enforceSecureTransport"></a>
@@ -805,6 +941,8 @@ public readonly enforceSecureTransport: boolean;
 ```
 
 - *Type:* boolean
+
+Whether to enforce Secure Transport in the policy.
 
 ---
 
@@ -816,6 +954,8 @@ public readonly sourceOrgID: string;
 
 - *Type:* string
 
+The AWS Organization ID to enforce as the source organization in the policy.
+
 ---
 
 ##### `targetIds`<sup>Required</sup> <a name="targetIds" id="advanced-cdk-constructs.ResourceControlPolicyProps.property.targetIds"></a>
@@ -826,6 +966,8 @@ public readonly targetIds: string[];
 
 - *Type:* string[]
 
+The list of target IDs (accounts, OUs, or roots) to which the policy will be attached.
+
 ---
 
 ##### `name`<sup>Optional</sup> <a name="name" id="advanced-cdk-constructs.ResourceControlPolicyProps.property.name"></a>
@@ -835,6 +977,11 @@ public readonly name: string;
 ```
 
 - *Type:* string
+- *Default:* Automatically generated name based on construct ID.
+
+The name of the resource control policy.
+
+If not provided, a default name will be generated.
 
 ---
 
@@ -846,9 +993,15 @@ public readonly sourceAccount: string[];
 
 - *Type:* string[]
 
+Optional list of allowed source AWS account IDs.
+
+If provided, only these accounts are allowed as source accounts.
+
 ---
 
 ### ServiceControlPolicyProps <a name="ServiceControlPolicyProps" id="advanced-cdk-constructs.ServiceControlPolicyProps"></a>
+
+Properties for defining a Service Control Policy.
 
 #### Initializer <a name="Initializer" id="advanced-cdk-constructs.ServiceControlPolicyProps.Initializer"></a>
 
@@ -862,10 +1015,10 @@ const serviceControlPolicyProps: ServiceControlPolicyProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps.property.statements">statements</a></code> | <code>any[]</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps.property.description">description</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps.property.name">name</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps.property.statements">statements</a></code> | <code>any[]</code> | The policy statements to include in the Service Control Policy. |
+| <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps.property.targetIds">targetIds</a></code> | <code>string[]</code> | The list of target IDs (accounts or organizational units) to which the policy will be attached. |
+| <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps.property.description">description</a></code> | <code>string</code> | The description of the Service Control Policy. |
+| <code><a href="#advanced-cdk-constructs.ServiceControlPolicyProps.property.name">name</a></code> | <code>string</code> | The name of the Service Control Policy. |
 
 ---
 
@@ -877,6 +1030,8 @@ public readonly statements: any[];
 
 - *Type:* any[]
 
+The policy statements to include in the Service Control Policy.
+
 ---
 
 ##### `targetIds`<sup>Required</sup> <a name="targetIds" id="advanced-cdk-constructs.ServiceControlPolicyProps.property.targetIds"></a>
@@ -887,6 +1042,8 @@ public readonly targetIds: string[];
 
 - *Type:* string[]
 
+The list of target IDs (accounts or organizational units) to which the policy will be attached.
+
 ---
 
 ##### `description`<sup>Optional</sup> <a name="description" id="advanced-cdk-constructs.ServiceControlPolicyProps.property.description"></a>
@@ -896,6 +1053,9 @@ public readonly description: string;
 ```
 
 - *Type:* string
+- *Default:* 'Service Control Policy from Advanced CDK Constructs'
+
+The description of the Service Control Policy.
 
 ---
 
@@ -906,6 +1066,9 @@ public readonly name: string;
 ```
 
 - *Type:* string
+- *Default:* A name based on the construct ID will be used.
+
+The name of the Service Control Policy.
 
 ---
 
@@ -915,177 +1078,229 @@ public readonly name: string;
 
 ### AllowedImagesState <a name="AllowedImagesState" id="advanced-cdk-constructs.AllowedImagesState"></a>
 
+State for allowed images policy.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#advanced-cdk-constructs.AllowedImagesState.ENABLED">ENABLED</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.AllowedImagesState.AUDIT_MODE">AUDIT_MODE</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.AllowedImagesState.ENABLED">ENABLED</a></code> | Only allow images from specified providers. |
+| <code><a href="#advanced-cdk-constructs.AllowedImagesState.AUDIT_MODE">AUDIT_MODE</a></code> | Audit mode for allowed images. |
 
 ---
 
 ##### `ENABLED` <a name="ENABLED" id="advanced-cdk-constructs.AllowedImagesState.ENABLED"></a>
+
+Only allow images from specified providers.
 
 ---
 
 
 ##### `AUDIT_MODE` <a name="AUDIT_MODE" id="advanced-cdk-constructs.AllowedImagesState.AUDIT_MODE"></a>
 
+Audit mode for allowed images.
+
 ---
 
 
 ### HttpEndpoint <a name="HttpEndpoint" id="advanced-cdk-constructs.HttpEndpoint"></a>
 
+Options for IMDSv2 HttpEndpoint.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#advanced-cdk-constructs.HttpEndpoint.NO_PREFERENCE">NO_PREFERENCE</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.HttpEndpoint.ENABLED">ENABLED</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.HttpEndpoint.DISABLED">DISABLED</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.HttpEndpoint.NO_PREFERENCE">NO_PREFERENCE</a></code> | No preference for HttpEndpoint. |
+| <code><a href="#advanced-cdk-constructs.HttpEndpoint.ENABLED">ENABLED</a></code> | Enable HttpEndpoint. |
+| <code><a href="#advanced-cdk-constructs.HttpEndpoint.DISABLED">DISABLED</a></code> | Disable HttpEndpoint. |
 
 ---
 
 ##### `NO_PREFERENCE` <a name="NO_PREFERENCE" id="advanced-cdk-constructs.HttpEndpoint.NO_PREFERENCE"></a>
+
+No preference for HttpEndpoint.
 
 ---
 
 
 ##### `ENABLED` <a name="ENABLED" id="advanced-cdk-constructs.HttpEndpoint.ENABLED"></a>
 
+Enable HttpEndpoint.
+
 ---
 
 
 ##### `DISABLED` <a name="DISABLED" id="advanced-cdk-constructs.HttpEndpoint.DISABLED"></a>
+
+Disable HttpEndpoint.
 
 ---
 
 
 ### HttpTokens <a name="HttpTokens" id="advanced-cdk-constructs.HttpTokens"></a>
 
+Options for IMDSv2 HttpTokens requirement.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#advanced-cdk-constructs.HttpTokens.NO_PREFERENCE">NO_PREFERENCE</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.HttpTokens.REQUIRED">REQUIRED</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.HttpTokens.OPTIONAL">OPTIONAL</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.HttpTokens.NO_PREFERENCE">NO_PREFERENCE</a></code> | No preference for HttpTokens. |
+| <code><a href="#advanced-cdk-constructs.HttpTokens.REQUIRED">REQUIRED</a></code> | Require HttpTokens. |
+| <code><a href="#advanced-cdk-constructs.HttpTokens.OPTIONAL">OPTIONAL</a></code> | HttpTokens are optional. |
 
 ---
 
 ##### `NO_PREFERENCE` <a name="NO_PREFERENCE" id="advanced-cdk-constructs.HttpTokens.NO_PREFERENCE"></a>
+
+No preference for HttpTokens.
 
 ---
 
 
 ##### `REQUIRED` <a name="REQUIRED" id="advanced-cdk-constructs.HttpTokens.REQUIRED"></a>
 
+Require HttpTokens.
+
 ---
 
 
 ##### `OPTIONAL` <a name="OPTIONAL" id="advanced-cdk-constructs.HttpTokens.OPTIONAL"></a>
+
+HttpTokens are optional.
 
 ---
 
 
 ### ImageProvider <a name="ImageProvider" id="advanced-cdk-constructs.ImageProvider"></a>
 
+Predefined image providers for allowed images policy.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#advanced-cdk-constructs.ImageProvider.AMAZON">AMAZON</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ImageProvider.AWS_MARKETPLACE">AWS_MARKETPLACE</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.ImageProvider.AWS_BACKUP_VAULT">AWS_BACKUP_VAULT</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.ImageProvider.AMAZON">AMAZON</a></code> | Amazon-provided images. |
+| <code><a href="#advanced-cdk-constructs.ImageProvider.AWS_MARKETPLACE">AWS_MARKETPLACE</a></code> | AWS Marketplace images. |
+| <code><a href="#advanced-cdk-constructs.ImageProvider.AWS_BACKUP_VAULT">AWS_BACKUP_VAULT</a></code> | AWS Backup Vault images. |
 
 ---
 
 ##### `AMAZON` <a name="AMAZON" id="advanced-cdk-constructs.ImageProvider.AMAZON"></a>
+
+Amazon-provided images.
 
 ---
 
 
 ##### `AWS_MARKETPLACE` <a name="AWS_MARKETPLACE" id="advanced-cdk-constructs.ImageProvider.AWS_MARKETPLACE"></a>
 
+AWS Marketplace images.
+
 ---
 
 
 ##### `AWS_BACKUP_VAULT` <a name="AWS_BACKUP_VAULT" id="advanced-cdk-constructs.ImageProvider.AWS_BACKUP_VAULT"></a>
+
+AWS Backup Vault images.
 
 ---
 
 
 ### InstanceMetadataTags <a name="InstanceMetadataTags" id="advanced-cdk-constructs.InstanceMetadataTags"></a>
 
+Options for IMDSv2 Instance Metadata Tags.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#advanced-cdk-constructs.InstanceMetadataTags.NO_PREFERENCE">NO_PREFERENCE</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.InstanceMetadataTags.ENABLED">ENABLED</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.InstanceMetadataTags.DISABLED">DISABLED</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.InstanceMetadataTags.NO_PREFERENCE">NO_PREFERENCE</a></code> | No preference for instance metadata tags. |
+| <code><a href="#advanced-cdk-constructs.InstanceMetadataTags.ENABLED">ENABLED</a></code> | Enable instance metadata tags. |
+| <code><a href="#advanced-cdk-constructs.InstanceMetadataTags.DISABLED">DISABLED</a></code> | Disable instance metadata tags. |
 
 ---
 
 ##### `NO_PREFERENCE` <a name="NO_PREFERENCE" id="advanced-cdk-constructs.InstanceMetadataTags.NO_PREFERENCE"></a>
+
+No preference for instance metadata tags.
 
 ---
 
 
 ##### `ENABLED` <a name="ENABLED" id="advanced-cdk-constructs.InstanceMetadataTags.ENABLED"></a>
 
+Enable instance metadata tags.
+
 ---
 
 
 ##### `DISABLED` <a name="DISABLED" id="advanced-cdk-constructs.InstanceMetadataTags.DISABLED"></a>
+
+Disable instance metadata tags.
 
 ---
 
 
 ### SnapshotBlockPublicAccessState <a name="SnapshotBlockPublicAccessState" id="advanced-cdk-constructs.SnapshotBlockPublicAccessState"></a>
 
+State for blocking public access to EBS snapshots.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#advanced-cdk-constructs.SnapshotBlockPublicAccessState.BLOCK_NEW_SHARING">BLOCK_NEW_SHARING</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.SnapshotBlockPublicAccessState.BLOCK_ALL_SHARING">BLOCK_ALL_SHARING</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.SnapshotBlockPublicAccessState.BLOCK_NEW_SHARING">BLOCK_NEW_SHARING</a></code> | Block new sharing of snapshots. |
+| <code><a href="#advanced-cdk-constructs.SnapshotBlockPublicAccessState.BLOCK_ALL_SHARING">BLOCK_ALL_SHARING</a></code> | Block all sharing of snapshots. |
 
 ---
 
 ##### `BLOCK_NEW_SHARING` <a name="BLOCK_NEW_SHARING" id="advanced-cdk-constructs.SnapshotBlockPublicAccessState.BLOCK_NEW_SHARING"></a>
+
+Block new sharing of snapshots.
 
 ---
 
 
 ##### `BLOCK_ALL_SHARING` <a name="BLOCK_ALL_SHARING" id="advanced-cdk-constructs.SnapshotBlockPublicAccessState.BLOCK_ALL_SHARING"></a>
 
+Block all sharing of snapshots.
+
 ---
 
 
 ### VpcBlockPublicAccessMode <a name="VpcBlockPublicAccessMode" id="advanced-cdk-constructs.VpcBlockPublicAccessMode"></a>
 
+Modes for blocking public access to VPCs.
+
 #### Members <a name="Members" id="Members"></a>
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode.OFF">OFF</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode.BLOCK_INGRESS">BLOCK_INGRESS</a></code> | *No description.* |
-| <code><a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode.BLOCK_BIDIRECTIONAL">BLOCK_BIDIRECTIONAL</a></code> | *No description.* |
+| <code><a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode.OFF">OFF</a></code> | No blocking of public access. |
+| <code><a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode.BLOCK_INGRESS">BLOCK_INGRESS</a></code> | Block only ingress (incoming) public access. |
+| <code><a href="#advanced-cdk-constructs.VpcBlockPublicAccessMode.BLOCK_BIDIRECTIONAL">BLOCK_BIDIRECTIONAL</a></code> | Block both ingress and egress (bidirectional) public access. |
 
 ---
 
 ##### `OFF` <a name="OFF" id="advanced-cdk-constructs.VpcBlockPublicAccessMode.OFF"></a>
+
+No blocking of public access.
 
 ---
 
 
 ##### `BLOCK_INGRESS` <a name="BLOCK_INGRESS" id="advanced-cdk-constructs.VpcBlockPublicAccessMode.BLOCK_INGRESS"></a>
 
+Block only ingress (incoming) public access.
+
 ---
 
 
 ##### `BLOCK_BIDIRECTIONAL` <a name="BLOCK_BIDIRECTIONAL" id="advanced-cdk-constructs.VpcBlockPublicAccessMode.BLOCK_BIDIRECTIONAL"></a>
+
+Block both ingress and egress (bidirectional) public access.
 
 ---
 
