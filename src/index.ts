@@ -13,3 +13,4 @@ export {
   SnapshotBlockPublicAccessState,
   ImageProviderOrAccountId,
 } from './declarative-policies/declarative-policies';
+export { AwsAccount, AwsAccountProps } from './aws-account/aws-account';

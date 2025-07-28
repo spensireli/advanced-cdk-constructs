@@ -2,6 +2,225 @@
 
 ## Constructs <a name="Constructs" id="Constructs"></a>
 
+### AwsAccount <a name="AwsAccount" id="advanced-cdk-constructs.AwsAccount"></a>
+
+A CDK construct that creates a new AWS Account within an AWS Organization.
+
+This construct creates a new AWS account and optionally places it within
+specified organizational units. The account can be configured with cross-account
+access roles and organizational tags.
+
+Example:
+```ts
+new AwsAccount(this, 'MyAccount', {
+  name: 'Development Account',
+  email: 'dev-account@example.com',
+  parentIds: ['ou-xxxx-xxxxxxxx'],
+  roleName: 'OrganizationAccountAccessRole',
+  tags: [
+    { key: 'Environment', value: 'Development' },
+    { key: 'Project', value: 'MyProject' }
+  ]
+});
+```
+
+#### Initializers <a name="Initializers" id="advanced-cdk-constructs.AwsAccount.Initializer"></a>
+
+```typescript
+import { AwsAccount } from 'advanced-cdk-constructs'
+
+new AwsAccount(scope: Construct, id: string, props: AwsAccountProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | The parent construct. |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.Initializer.parameter.id">id</a></code> | <code>string</code> | The construct ID. |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.AwsAccountProps">AwsAccountProps</a></code> | The properties for creating the AWS account. |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="advanced-cdk-constructs.AwsAccount.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+The parent construct.
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="advanced-cdk-constructs.AwsAccount.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+The construct ID.
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="advanced-cdk-constructs.AwsAccount.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#advanced-cdk-constructs.AwsAccountProps">AwsAccountProps</a>
+
+The properties for creating the AWS account.
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="advanced-cdk-constructs.AwsAccount.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="advanced-cdk-constructs.AwsAccount.isConstruct"></a>
+
+```typescript
+import { AwsAccount } from 'advanced-cdk-constructs'
+
+AwsAccount.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="advanced-cdk-constructs.AwsAccount.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.property.accountArn">accountArn</a></code> | <code>string</code> | The ARN of the created AWS account. |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.property.accountId">accountId</a></code> | <code>string</code> | The AWS Account ID of the created account. |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.property.accountName">accountName</a></code> | <code>string</code> | The name of the AWS account as specified in the props. |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.property.accountStatus">accountStatus</a></code> | <code>string</code> | The current status of the AWS account (e.g., 'ACTIVE', 'SUSPENDED'). |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.property.joinedMethod">joinedMethod</a></code> | <code>string</code> | The method by which the account joined the organization (e.g., 'INVITED'). |
+| <code><a href="#advanced-cdk-constructs.AwsAccount.property.joinedTimestamp">joinedTimestamp</a></code> | <code>string</code> | The timestamp when the account joined the organization. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="advanced-cdk-constructs.AwsAccount.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `accountArn`<sup>Required</sup> <a name="accountArn" id="advanced-cdk-constructs.AwsAccount.property.accountArn"></a>
+
+```typescript
+public readonly accountArn: string;
+```
+
+- *Type:* string
+
+The ARN of the created AWS account.
+
+---
+
+##### `accountId`<sup>Required</sup> <a name="accountId" id="advanced-cdk-constructs.AwsAccount.property.accountId"></a>
+
+```typescript
+public readonly accountId: string;
+```
+
+- *Type:* string
+
+The AWS Account ID of the created account.
+
+This will be available after the account creation is complete.
+
+---
+
+##### `accountName`<sup>Required</sup> <a name="accountName" id="advanced-cdk-constructs.AwsAccount.property.accountName"></a>
+
+```typescript
+public readonly accountName: string;
+```
+
+- *Type:* string
+
+The name of the AWS account as specified in the props.
+
+---
+
+##### `accountStatus`<sup>Required</sup> <a name="accountStatus" id="advanced-cdk-constructs.AwsAccount.property.accountStatus"></a>
+
+```typescript
+public readonly accountStatus: string;
+```
+
+- *Type:* string
+
+The current status of the AWS account (e.g., 'ACTIVE', 'SUSPENDED').
+
+---
+
+##### `joinedMethod`<sup>Required</sup> <a name="joinedMethod" id="advanced-cdk-constructs.AwsAccount.property.joinedMethod"></a>
+
+```typescript
+public readonly joinedMethod: string;
+```
+
+- *Type:* string
+
+The method by which the account joined the organization (e.g., 'INVITED').
+
+---
+
+##### `joinedTimestamp`<sup>Required</sup> <a name="joinedTimestamp" id="advanced-cdk-constructs.AwsAccount.property.joinedTimestamp"></a>
+
+```typescript
+public readonly joinedTimestamp: string;
+```
+
+- *Type:* string
+
+The timestamp when the account joined the organization.
+
+---
+
+
 ### DeclarativePolicy <a name="DeclarativePolicy" id="advanced-cdk-constructs.DeclarativePolicy"></a>
 
 A CDK construct that creates an AWS Organizations EC2 Declarative Policy.
@@ -581,6 +800,103 @@ The ARN of the created Service Control Policy.
 
 
 ## Structs <a name="Structs" id="Structs"></a>
+
+### AwsAccountProps <a name="AwsAccountProps" id="advanced-cdk-constructs.AwsAccountProps"></a>
+
+Properties for creating an AWS Account within an AWS Organization.
+
+#### Initializer <a name="Initializer" id="advanced-cdk-constructs.AwsAccountProps.Initializer"></a>
+
+```typescript
+import { AwsAccountProps } from 'advanced-cdk-constructs'
+
+const awsAccountProps: AwsAccountProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#advanced-cdk-constructs.AwsAccountProps.property.email">email</a></code> | <code>string</code> | The email address associated with the AWS account. |
+| <code><a href="#advanced-cdk-constructs.AwsAccountProps.property.name">name</a></code> | <code>string</code> | The name of the AWS account. |
+| <code><a href="#advanced-cdk-constructs.AwsAccountProps.property.parentIds">parentIds</a></code> | <code>string[]</code> | Optional list of parent organizational unit IDs or root IDs. |
+| <code><a href="#advanced-cdk-constructs.AwsAccountProps.property.roleName">roleName</a></code> | <code>string</code> | Optional IAM role name to be used for cross-account access. |
+| <code><a href="#advanced-cdk-constructs.AwsAccountProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | Optional list of tags to apply to the AWS account. |
+
+---
+
+##### `email`<sup>Required</sup> <a name="email" id="advanced-cdk-constructs.AwsAccountProps.property.email"></a>
+
+```typescript
+public readonly email: string;
+```
+
+- *Type:* string
+
+The email address associated with the AWS account.
+
+This email must be unique and not already associated with another AWS account.
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="advanced-cdk-constructs.AwsAccountProps.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+The name of the AWS account.
+
+This will be the display name in the AWS Organizations console.
+
+---
+
+##### `parentIds`<sup>Optional</sup> <a name="parentIds" id="advanced-cdk-constructs.AwsAccountProps.property.parentIds"></a>
+
+```typescript
+public readonly parentIds: string[];
+```
+
+- *Type:* string[]
+- *Default:* Account will be placed in the root
+
+Optional list of parent organizational unit IDs or root IDs.
+
+If not provided, the account will be placed in the root of the organization.
+
+---
+
+##### `roleName`<sup>Optional</sup> <a name="roleName" id="advanced-cdk-constructs.AwsAccountProps.property.roleName"></a>
+
+```typescript
+public readonly roleName: string;
+```
+
+- *Type:* string
+- *Default:* No cross-account role will be created
+
+Optional IAM role name to be used for cross-account access.
+
+This role will be created in the new account and can be assumed by the master account.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="advanced-cdk-constructs.AwsAccountProps.property.tags"></a>
+
+```typescript
+public readonly tags: CfnTag[];
+```
+
+- *Type:* aws-cdk-lib.CfnTag[]
+- *Default:* No tags will be applied
+
+Optional list of tags to apply to the AWS account.
+
+These tags will help with organization and cost tracking.
+
+---
 
 ### DeclarativePolicyProps <a name="DeclarativePolicyProps" id="advanced-cdk-constructs.DeclarativePolicyProps"></a>
 
