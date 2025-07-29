@@ -84,7 +84,64 @@ describe('DeclarativePolicy Construct', () => {
         TargetIds: ['ou-1234567890'],
         Content: Match.objectLike({
           Version: '2012-10-17',
-          Statement: [],
+          Statement: Match.arrayWith([
+            Match.objectLike({
+              vpc_block_public_access: {
+                internet_gateway_block: {
+                  mode: {
+                    '@@assign': 'block_ingress',
+                  },
+                  exclusions_allowed: {
+                    '@@assign': 'enabled',
+                  },
+                },
+              },
+            }),
+            Match.objectLike({
+              serial_console_access: {
+                status: {
+                  '@@assign': 'disabled',
+                },
+              },
+            }),
+            Match.objectLike({
+              image_block_public_access: {
+                state: {
+                  '@@assign': 'block_new_sharing',
+                },
+              },
+            }),
+            Match.objectLike({
+              allowed_images_settings: {
+                state: {
+                  '@@assign': 'enabled',
+                },
+              },
+            }),
+            Match.objectLike({
+              instance_metadata_defaults: {
+                http_tokens: {
+                  '@@assign': 'required',
+                },
+                http_put_response_hop_limit: {
+                  '@@assign': '4',
+                },
+                http_endpoint: {
+                  '@@assign': 'enabled',
+                },
+                instance_metadata_tags: {
+                  '@@assign': 'enabled',
+                },
+              },
+            }),
+            Match.objectLike({
+              snapshot_block_public_access: {
+                state: {
+                  '@@assign': 'block_new_sharing',
+                },
+              },
+            }),
+          ]),
         }),
       });
     });
@@ -125,9 +182,6 @@ describe('DeclarativePolicy Construct', () => {
                 internet_gateway_block: {
                   mode: {
                     '@@assign': 'block_ingress',
-                  },
-                  exclusions_allowed: {
-                    '@@assign': 'enabled',
                   },
                 },
               },
