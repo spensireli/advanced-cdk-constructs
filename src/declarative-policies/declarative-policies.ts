@@ -96,17 +96,17 @@ export interface DeclarativePolicyProps {
   readonly name?: string;
   /** The description of the policy. */
   readonly description?: string;
-  /** Whether to block public access to VPCs. */
+  /** Whether to block public access to VPCs. Defaults to true. */
   readonly vpcBlockPublicAccess?: boolean;
-  /** Whether to disable serial console access. */
+  /** Whether to disable serial console access. Defaults to true. */
   readonly disableSerialConsoleAccess?: boolean;
-  /** Whether to block public access to AMIs. */
+  /** Whether to block public access to AMIs. Defaults to true. */
   readonly imageBlockPublicAccess?: boolean;
-  /** Whether to restrict allowed image providers. */
+  /** Whether to restrict allowed image providers. Defaults to true. */
   readonly restrictImageProviders?: boolean;
-  /** Whether to enforce instance metadata service defaults. */
+  /** Whether to enforce instance metadata service defaults. Defaults to true. */
   readonly instanceMetadataDefaults?: boolean;
-  /** Whether to block public sharing of EBS snapshots. */
+  /** Whether to block public sharing of EBS snapshots. Defaults to true. */
   readonly blockPublicSnapshots?: boolean;
   /** The mode for blocking public access to VPCs. */
   readonly vpcBlockPublicAccessMode?: VpcBlockPublicAccessMode;
@@ -157,9 +157,17 @@ export class DeclarativePolicy extends Construct {
   constructor(scope: Construct, id: string, props: DeclarativePolicyProps) {
     super(scope, id);
 
+    // Set defaults for boolean properties
+    const vpcBlockPublicAccess = props.vpcBlockPublicAccess ?? true;
+    const disableSerialConsoleAccess = props.disableSerialConsoleAccess ?? true;
+    const imageBlockPublicAccess = props.imageBlockPublicAccess ?? true;
+    const restrictImageProviders = props.restrictImageProviders ?? true;
+    const instanceMetadataDefaults = props.instanceMetadataDefaults ?? true;
+    const blockPublicSnapshots = props.blockPublicSnapshots ?? true;
+
     const statements: any[] = [];
 
-    if (props.vpcBlockPublicAccess) {
+    if (vpcBlockPublicAccess) {
       const vpcBlockPublicAccessStatement = {
         vpc_block_public_access: {
           internet_gateway_block: {
@@ -175,7 +183,7 @@ export class DeclarativePolicy extends Construct {
       statements.push(vpcBlockPublicAccessStatement);
     }
 
-    if (props.disableSerialConsoleAccess) {
+    if (disableSerialConsoleAccess) {
       const serialConsoleDisableStatement = {
         serial_console_access: {
           status: {
@@ -186,7 +194,7 @@ export class DeclarativePolicy extends Construct {
       statements.push(serialConsoleDisableStatement);
     }
 
-    if (props.imageBlockPublicAccess) {
+    if (imageBlockPublicAccess) {
       const imageBlockPublicAccessStatement = {
         image_block_public_access: {
           state: {
@@ -197,7 +205,7 @@ export class DeclarativePolicy extends Construct {
       statements.push(imageBlockPublicAccessStatement);
     }
 
-    if (props.restrictImageProviders) {
+    if (restrictImageProviders) {
       const allowedImagesStatement: any = {
         allowed_images_settings: {
           state: {
@@ -218,7 +226,7 @@ export class DeclarativePolicy extends Construct {
       statements.push(allowedImagesStatement);
     }
 
-    if (props.instanceMetadataDefaults) {
+    if (instanceMetadataDefaults) {
       const instanceMetadataDefaultsStatement = {
         instance_metadata_defaults: {
           http_tokens: {
@@ -238,7 +246,7 @@ export class DeclarativePolicy extends Construct {
       statements.push(instanceMetadataDefaultsStatement);
     }
 
-    if (props.blockPublicSnapshots) {
+    if (blockPublicSnapshots) {
       const snapshotBlockPublicAccessStatement = {
         snapshot_block_public_access: {
           state: {

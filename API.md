@@ -980,6 +980,8 @@ public readonly blockPublicSnapshots: boolean;
 
 Whether to block public sharing of EBS snapshots.
 
+Defaults to true.
+
 ---
 
 ##### `description`<sup>Optional</sup> <a name="description" id="advanced-cdk-constructs.DeclarativePolicyProps.property.description"></a>
@@ -1003,6 +1005,8 @@ public readonly disableSerialConsoleAccess: boolean;
 - *Type:* boolean
 
 Whether to disable serial console access.
+
+Defaults to true.
 
 ---
 
@@ -1052,6 +1056,8 @@ public readonly imageBlockPublicAccess: boolean;
 
 Whether to block public access to AMIs.
 
+Defaults to true.
+
 ---
 
 ##### `instanceMetadataDefaults`<sup>Optional</sup> <a name="instanceMetadataDefaults" id="advanced-cdk-constructs.DeclarativePolicyProps.property.instanceMetadataDefaults"></a>
@@ -1063,6 +1069,8 @@ public readonly instanceMetadataDefaults: boolean;
 - *Type:* boolean
 
 Whether to enforce instance metadata service defaults.
+
+Defaults to true.
 
 ---
 
@@ -1100,6 +1108,8 @@ public readonly restrictImageProviders: boolean;
 
 Whether to restrict allowed image providers.
 
+Defaults to true.
+
 ---
 
 ##### `snapshotBlockPublicAccessState`<sup>Optional</sup> <a name="snapshotBlockPublicAccessState" id="advanced-cdk-constructs.DeclarativePolicyProps.property.snapshotBlockPublicAccessState"></a>
@@ -1123,6 +1133,8 @@ public readonly vpcBlockPublicAccess: boolean;
 - *Type:* boolean
 
 Whether to block public access to VPCs.
+
+Defaults to true.
 
 ---
 
