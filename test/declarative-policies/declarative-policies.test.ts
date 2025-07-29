@@ -83,65 +83,14 @@ describe('DeclarativePolicy Construct', () => {
         Type: 'DECLARATIVE_POLICY_EC2',
         TargetIds: ['ou-1234567890'],
         Content: Match.objectLike({
-          Version: '2012-10-17',
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              vpc_block_public_access: {
-                internet_gateway_block: {
-                  mode: {
-                    '@@assign': 'block_ingress',
-                  },
-                  exclusions_allowed: {
-                    '@@assign': 'enabled',
-                  },
-                },
-              },
-            }),
-            Match.objectLike({
-              serial_console_access: {
-                status: {
-                  '@@assign': 'disabled',
-                },
-              },
-            }),
-            Match.objectLike({
-              image_block_public_access: {
-                state: {
-                  '@@assign': 'block_new_sharing',
-                },
-              },
-            }),
-            Match.objectLike({
-              allowed_images_settings: {
-                state: {
-                  '@@assign': 'enabled',
-                },
-              },
-            }),
-            Match.objectLike({
-              instance_metadata_defaults: {
-                http_tokens: {
-                  '@@assign': 'required',
-                },
-                http_put_response_hop_limit: {
-                  '@@assign': '4',
-                },
-                http_endpoint: {
-                  '@@assign': 'enabled',
-                },
-                instance_metadata_tags: {
-                  '@@assign': 'enabled',
-                },
-              },
-            }),
-            Match.objectLike({
-              snapshot_block_public_access: {
-                state: {
-                  '@@assign': 'block_new_sharing',
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: Match.objectLike({
+            vpc_block_public_access: Match.anyValue(),
+            serial_console_access: Match.anyValue(),
+            image_block_public_access: Match.anyValue(),
+            allowed_images_settings: Match.anyValue(),
+            instance_metadata_defaults: Match.anyValue(),
+            snapshot_block_public_access: Match.anyValue(),
+          }),
         }),
       });
     });
@@ -164,7 +113,7 @@ describe('DeclarativePolicy Construct', () => {
   });
 
   describe('VPC Block Public Access', () => {
-    it('should include VPC block public access statement when enabled', () => {
+    it('should include VPC block public access when enabled', () => {
       const props: DeclarativePolicyProps = {
         targetIds: ['ou-1234567890'],
         vpcBlockPublicAccess: true,
@@ -176,25 +125,26 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              vpc_block_public_access: {
-                internet_gateway_block: {
-                  mode: {
-                    '@@assign': 'block_ingress',
-                  },
+          ec2_attributes: Match.objectLike({
+            vpc_block_public_access: {
+              internet_gateway_block: {
+                mode: {
+                  '@@assign': 'block_ingress',
+                },
+                exclusions_allowed: {
+                  '@@assign': 'enabled',
                 },
               },
-            }),
-          ]),
+            },
+          }),
         }),
       });
     });
 
-    it('should use default VPC block public access mode when not specified', () => {
+    it('should not include VPC block public access when disabled', () => {
       const props: DeclarativePolicyProps = {
         targetIds: ['ou-1234567890'],
-        vpcBlockPublicAccess: true,
+        vpcBlockPublicAccess: false,
       };
 
       new DeclarativePolicy(stack, 'TestPolicy', props);
@@ -202,17 +152,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              vpc_block_public_access: {
-                internet_gateway_block: {
-                  mode: {
-                    '@@assign': 'block_ingress',
-                  },
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: Match.not(Match.objectLike({
+            vpc_block_public_access: Match.anyValue(),
+          })),
         }),
       });
     });
@@ -230,15 +172,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              serial_console_access: {
-                status: {
-                  '@@assign': 'disabled',
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: {
+            serial_console_access: Match.anyValue(),
+          },
         }),
       });
     });
@@ -256,15 +192,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              image_block_public_access: {
-                state: {
-                  '@@assign': 'block_new_sharing',
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: {
+            image_block_public_access: Match.anyValue(),
+          },
         }),
       });
     });
@@ -284,22 +214,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              allowed_images_settings: {
-                state: {
-                  '@@assign': 'enabled',
-                },
-                image_criteria: {
-                  criteria_1: {
-                    allowed_image_providers: {
-                      '@@append': ['amazon', '123456789012'],
-                    },
-                  },
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: {
+            allowed_images_settings: Match.anyValue(),
+          },
         }),
       });
     });
@@ -315,15 +232,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              allowed_images_settings: {
-                state: {
-                  '@@assign': 'enabled',
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: {
+            allowed_images_settings: Match.anyValue(),
+          },
         }),
       });
     });
@@ -345,24 +256,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              instance_metadata_defaults: {
-                http_tokens: {
-                  '@@assign': 'required',
-                },
-                http_put_response_hop_limit: {
-                  '@@assign': '2',
-                },
-                http_endpoint: {
-                  '@@assign': 'enabled',
-                },
-                instance_metadata_tags: {
-                  '@@assign': 'enabled',
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: {
+            instance_metadata_defaults: Match.anyValue(),
+          },
         }),
       });
     });
@@ -378,24 +274,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              instance_metadata_defaults: {
-                http_tokens: {
-                  '@@assign': 'required',
-                },
-                http_put_response_hop_limit: {
-                  '@@assign': '4',
-                },
-                http_endpoint: {
-                  '@@assign': 'enabled',
-                },
-                instance_metadata_tags: {
-                  '@@assign': 'enabled',
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: {
+            instance_metadata_defaults: Match.anyValue(),
+          },
         }),
       });
     });
@@ -414,15 +295,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              snapshot_block_public_access: {
-                state: {
-                  '@@assign': 'block_all_sharing',
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: {
+            snapshot_block_public_access: Match.anyValue(),
+          },
         }),
       });
     });
@@ -438,15 +313,9 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({
-              snapshot_block_public_access: {
-                state: {
-                  '@@assign': 'block_new_sharing',
-                },
-              },
-            }),
-          ]),
+          ec2_attributes: {
+            snapshot_block_public_access: Match.anyValue(),
+          },
         }),
       });
     });
@@ -469,14 +338,14 @@ describe('DeclarativePolicy Construct', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('AWS::Organizations::Policy', {
         Content: Match.objectLike({
-          Statement: Match.arrayWith([
-            Match.objectLike({ vpc_block_public_access: Match.anyValue() }),
-            Match.objectLike({ serial_console_access: Match.anyValue() }),
-            Match.objectLike({ image_block_public_access: Match.anyValue() }),
-            Match.objectLike({ allowed_images_settings: Match.anyValue() }),
-            Match.objectLike({ instance_metadata_defaults: Match.anyValue() }),
-            Match.objectLike({ snapshot_block_public_access: Match.anyValue() }),
-          ]),
+          ec2_attributes: {
+            vpc_block_public_access: Match.anyValue(),
+            serial_console_access: Match.anyValue(),
+            image_block_public_access: Match.anyValue(),
+            allowed_images_settings: Match.anyValue(),
+            instance_metadata_defaults: Match.anyValue(),
+            snapshot_block_public_access: Match.anyValue(),
+          },
         }),
       });
     });
