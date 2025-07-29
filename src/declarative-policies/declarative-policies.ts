@@ -165,11 +165,9 @@ export class DeclarativePolicy extends Construct {
     const instanceMetadataDefaults = props.instanceMetadataDefaults ?? true;
     const blockPublicSnapshots = props.blockPublicSnapshots ?? true;
 
-    const statements: any[] = [];
-
-    if (vpcBlockPublicAccess) {
-      const vpcBlockPublicAccessStatement = {
-        vpc_block_public_access: {
+    const declarativePolicy = {
+      ec2_attributes: {
+        vpc_block_public_access: vpcBlockPublicAccess ? {
           internet_gateway_block: {
             mode: {
               '@@assign': props.vpcBlockPublicAccessMode ?? VpcBlockPublicAccessMode.BLOCK_INGRESS,
@@ -178,57 +176,32 @@ export class DeclarativePolicy extends Construct {
               '@@assign': 'enabled',
             },
           },
-        },
-      };
-      statements.push(vpcBlockPublicAccessStatement);
-    }
-
-    if (disableSerialConsoleAccess) {
-      const serialConsoleDisableStatement = {
-        serial_console_access: {
+        } : undefined,
+        serial_console_access: disableSerialConsoleAccess ? {
           status: {
             '@@assign': 'disabled',
           },
-        },
-      };
-      statements.push(serialConsoleDisableStatement);
-    }
-
-    if (imageBlockPublicAccess) {
-      const imageBlockPublicAccessStatement = {
-        image_block_public_access: {
+        } : undefined,
+        image_block_public_access: imageBlockPublicAccess ? {
           state: {
             '@@assign': 'block_new_sharing',
           },
-        },
-      };
-      statements.push(imageBlockPublicAccessStatement);
-    }
-
-    if (restrictImageProviders) {
-      const allowedImagesStatement: any = {
-        allowed_images_settings: {
+        } : undefined,
+        allowed_images_settings: restrictImageProviders ? {
           state: {
             '@@assign': props.allowedImagesState ?? AllowedImagesState.ENABLED,
           },
-        },
-      };
-
-      if (props.allowedImageProviders && props.allowedImageProviders.length > 0) {
-        allowedImagesStatement.allowed_images_settings.image_criteria = {
-          criteria_1: {
-            allowed_image_providers: {
-              '@@append': props.allowedImageProviders,
+          ...(props.allowedImageProviders && props.allowedImageProviders.length > 0 ? {
+            image_criteria: {
+              criteria_1: {
+                allowed_image_providers: {
+                  '@@append': props.allowedImageProviders,
+                },
+              },
             },
-          },
-        };
-      }
-      statements.push(allowedImagesStatement);
-    }
-
-    if (instanceMetadataDefaults) {
-      const instanceMetadataDefaultsStatement = {
-        instance_metadata_defaults: {
+          } : {}),
+        } : undefined,
+        instance_metadata_defaults: instanceMetadataDefaults ? {
           http_tokens: {
             '@@assign': props.httpTokens ?? HttpTokens.REQUIRED,
           },
@@ -241,25 +214,13 @@ export class DeclarativePolicy extends Construct {
           instance_metadata_tags: {
             '@@assign': props.instanceMetadataTags ?? InstanceMetadataTags.ENABLED,
           },
-        },
-      };
-      statements.push(instanceMetadataDefaultsStatement);
-    }
-
-    if (blockPublicSnapshots) {
-      const snapshotBlockPublicAccessStatement = {
-        snapshot_block_public_access: {
+        } : undefined,
+        snapshot_block_public_access: blockPublicSnapshots ? {
           state: {
             '@@assign': props.snapshotBlockPublicAccessState ?? SnapshotBlockPublicAccessState.BLOCK_NEW_SHARING,
           },
-        },
-      };
-      statements.push(snapshotBlockPublicAccessStatement);
-    }
-
-    const declarativePolicy = {
-      Version: '2012-10-17',
-      Statement: statements,
+        } : undefined,
+      },
     };
 
     const applyDeclarativePolicy = new organizations.CfnPolicy(this, `DeclarativePolicy-${this.node.id}`, {
