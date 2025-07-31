@@ -221,6 +221,209 @@ The timestamp when the account joined the organization.
 ---
 
 
+### ControlTowerLandingZone <a name="ControlTowerLandingZone" id="advanced-cdk-constructs.ControlTowerLandingZone"></a>
+
+AWS Control Tower Landing Zone construct.
+
+This construct provides a comprehensive solution for deploying and managing
+AWS Control Tower landing zones with centralized logging, security auditing,
+and organizational structure management.
+
+*Example*
+
+```typescript
+const landingZone = new ControlTowerLandingZone(this, 'MyLandingZone', {
+  controlTowerStackName: 'my-control-tower',
+  governedRegions: ['us-east-1', 'us-west-2'],
+  logArchiveAccountEmail: 'log-archive@example.com',
+  securityAuditAccountEmail: 'security-audit@example.com',
+  logRetentionDays: 90,
+});
+```
+
+
+#### Initializers <a name="Initializers" id="advanced-cdk-constructs.ControlTowerLandingZone.Initializer"></a>
+
+```typescript
+import { ControlTowerLandingZone } from 'advanced-cdk-constructs'
+
+new ControlTowerLandingZone(scope: Construct, id: string, props: ControlTowerLandingZoneProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | - The scope in which this construct is defined. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.Initializer.parameter.id">id</a></code> | <code>string</code> | - The unique identifier for this construct. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.Initializer.parameter.props">props</a></code> | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps">ControlTowerLandingZoneProps</a></code> | - Configuration properties for the landing zone. |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="advanced-cdk-constructs.ControlTowerLandingZone.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+The scope in which this construct is defined.
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="advanced-cdk-constructs.ControlTowerLandingZone.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+The unique identifier for this construct.
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="advanced-cdk-constructs.ControlTowerLandingZone.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps">ControlTowerLandingZoneProps</a>
+
+Configuration properties for the landing zone.
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="advanced-cdk-constructs.ControlTowerLandingZone.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="advanced-cdk-constructs.ControlTowerLandingZone.isConstruct"></a>
+
+```typescript
+import { ControlTowerLandingZone } from 'advanced-cdk-constructs'
+
+ControlTowerLandingZone.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
+
+###### `x`<sup>Required</sup> <a name="x" id="advanced-cdk-constructs.ControlTowerLandingZone.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.landingZoneArn">landingZoneArn</a></code> | <code>string</code> | The ARN of the Control Tower landing zone. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.landingZoneId">landingZoneId</a></code> | <code>string</code> | The unique identifier of the Control Tower landing zone. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.logArchiveAccountId">logArchiveAccountId</a></code> | <code>string</code> | The AWS account ID of the log archive account. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.loggingKmsKeyArn">loggingKmsKeyArn</a></code> | <code>string</code> | The ARN of the KMS key used for logging bucket encryption. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.securityAuditAccountId">securityAuditAccountId</a></code> | <code>string</code> | The AWS account ID of the security audit account. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="advanced-cdk-constructs.ControlTowerLandingZone.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `landingZoneArn`<sup>Required</sup> <a name="landingZoneArn" id="advanced-cdk-constructs.ControlTowerLandingZone.property.landingZoneArn"></a>
+
+```typescript
+public readonly landingZoneArn: string;
+```
+
+- *Type:* string
+
+The ARN of the Control Tower landing zone.
+
+---
+
+##### `landingZoneId`<sup>Required</sup> <a name="landingZoneId" id="advanced-cdk-constructs.ControlTowerLandingZone.property.landingZoneId"></a>
+
+```typescript
+public readonly landingZoneId: string;
+```
+
+- *Type:* string
+
+The unique identifier of the Control Tower landing zone.
+
+---
+
+##### `logArchiveAccountId`<sup>Optional</sup> <a name="logArchiveAccountId" id="advanced-cdk-constructs.ControlTowerLandingZone.property.logArchiveAccountId"></a>
+
+```typescript
+public readonly logArchiveAccountId: string;
+```
+
+- *Type:* string
+
+The AWS account ID of the log archive account.
+
+---
+
+##### `loggingKmsKeyArn`<sup>Optional</sup> <a name="loggingKmsKeyArn" id="advanced-cdk-constructs.ControlTowerLandingZone.property.loggingKmsKeyArn"></a>
+
+```typescript
+public readonly loggingKmsKeyArn: string;
+```
+
+- *Type:* string
+
+The ARN of the KMS key used for logging bucket encryption.
+
+---
+
+##### `securityAuditAccountId`<sup>Optional</sup> <a name="securityAuditAccountId" id="advanced-cdk-constructs.ControlTowerLandingZone.property.securityAuditAccountId"></a>
+
+```typescript
+public readonly securityAuditAccountId: string;
+```
+
+- *Type:* string
+
+The AWS account ID of the security audit account.
+
+---
+
+
 ### DeclarativePolicy <a name="DeclarativePolicy" id="advanced-cdk-constructs.DeclarativePolicy"></a>
 
 A CDK construct that creates an AWS Organizations EC2 Declarative Policy.
@@ -898,6 +1101,236 @@ These tags will help with organization and cost tracking.
 
 ---
 
+### ControlTowerLandingZoneProps <a name="ControlTowerLandingZoneProps" id="advanced-cdk-constructs.ControlTowerLandingZoneProps"></a>
+
+Properties for configuring AWS Control Tower Landing Zone.
+
+This interface defines all the configuration options available for setting up
+a Control Tower landing zone with centralized logging, security auditing,
+and organizational structure management.
+
+#### Initializer <a name="Initializer" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.Initializer"></a>
+
+```typescript
+import { ControlTowerLandingZoneProps } from 'advanced-cdk-constructs'
+
+const controlTowerLandingZoneProps: ControlTowerLandingZoneProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.controlTowerStackName">controlTowerStackName</a></code> | <code>string</code> | The name of the Control Tower stack. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.accessLoggingBucketRetentionDays">accessLoggingBucketRetentionDays</a></code> | <code>number</code> | Number of days to retain access logs in the access logging bucket. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.governedRegions">governedRegions</a></code> | <code>string[]</code> | AWS regions where Control Tower governance will be applied. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountEmail">logArchiveAccountEmail</a></code> | <code>string</code> | Email address for the log archive account. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountId">logArchiveAccountId</a></code> | <code>string</code> | AWS account ID for the log archive account. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountRoleName">logArchiveAccountRoleName</a></code> | <code>string</code> | IAM role name for the log archive account. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountTags">logArchiveAccountTags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | Tags to apply to the log archive account. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.loggingBucketKmsKeyArn">loggingBucketKmsKeyArn</a></code> | <code>string</code> | ARN of the KMS key for encrypting the logging bucket. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logRetentionDays">logRetentionDays</a></code> | <code>number</code> | Number of days to retain logs in the centralized logging bucket. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.organizationStructure">organizationStructure</a></code> | <code>{[ key: string ]: <a href="#advanced-cdk-constructs.OrganizationalUnit">OrganizationalUnit</a>}</code> | Custom organizational structure. If not provided, defaults to AWS best practices structure. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.securityAuditAccountEmail">securityAuditAccountEmail</a></code> | <code>string</code> | Email address for the security audit account. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.securityAuditAccountId">securityAuditAccountId</a></code> | <code>string</code> | AWS account ID for the security audit account. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.securityAuditAccountRoleName">securityAuditAccountRoleName</a></code> | <code>string</code> | IAM role name for the security audit account. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.securityAuditAccountTags">securityAuditAccountTags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | Tags to apply to the security audit account. |
+
+---
+
+##### `controlTowerStackName`<sup>Required</sup> <a name="controlTowerStackName" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.controlTowerStackName"></a>
+
+```typescript
+public readonly controlTowerStackName: string;
+```
+
+- *Type:* string
+
+The name of the Control Tower stack.
+
+---
+
+##### `accessLoggingBucketRetentionDays`<sup>Optional</sup> <a name="accessLoggingBucketRetentionDays" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.accessLoggingBucketRetentionDays"></a>
+
+```typescript
+public readonly accessLoggingBucketRetentionDays: number;
+```
+
+- *Type:* number
+- *Default:* 60 days
+
+Number of days to retain access logs in the access logging bucket.
+
+---
+
+##### `governedRegions`<sup>Optional</sup> <a name="governedRegions" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.governedRegions"></a>
+
+```typescript
+public readonly governedRegions: string[];
+```
+
+- *Type:* string[]
+- *Default:* Uses the current stack's region
+
+AWS regions where Control Tower governance will be applied.
+
+---
+
+##### `logArchiveAccountEmail`<sup>Optional</sup> <a name="logArchiveAccountEmail" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountEmail"></a>
+
+```typescript
+public readonly logArchiveAccountEmail: string;
+```
+
+- *Type:* string
+
+Email address for the log archive account.
+
+Required when logArchiveAccountId is not provided.
+
+---
+
+##### `logArchiveAccountId`<sup>Optional</sup> <a name="logArchiveAccountId" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountId"></a>
+
+```typescript
+public readonly logArchiveAccountId: string;
+```
+
+- *Type:* string
+
+AWS account ID for the log archive account.
+
+If not provided, a new account will be created using logArchiveAccountEmail.
+
+---
+
+##### `logArchiveAccountRoleName`<sup>Optional</sup> <a name="logArchiveAccountRoleName" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountRoleName"></a>
+
+```typescript
+public readonly logArchiveAccountRoleName: string;
+```
+
+- *Type:* string
+- *Default:* Uses Control Tower default role name
+
+IAM role name for the log archive account.
+
+---
+
+##### `logArchiveAccountTags`<sup>Optional</sup> <a name="logArchiveAccountTags" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountTags"></a>
+
+```typescript
+public readonly logArchiveAccountTags: CfnTag[];
+```
+
+- *Type:* aws-cdk-lib.CfnTag[]
+- *Default:* Purpose: Log Archive, Environment: Production
+
+Tags to apply to the log archive account.
+
+---
+
+##### `loggingBucketKmsKeyArn`<sup>Optional</sup> <a name="loggingBucketKmsKeyArn" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.loggingBucketKmsKeyArn"></a>
+
+```typescript
+public readonly loggingBucketKmsKeyArn: string;
+```
+
+- *Type:* string
+
+ARN of the KMS key for encrypting the logging bucket.
+
+If not provided, a new KMS key will be created.
+
+---
+
+##### `logRetentionDays`<sup>Optional</sup> <a name="logRetentionDays" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logRetentionDays"></a>
+
+```typescript
+public readonly logRetentionDays: number;
+```
+
+- *Type:* number
+- *Default:* 60 days
+
+Number of days to retain logs in the centralized logging bucket.
+
+---
+
+##### `organizationStructure`<sup>Optional</sup> <a name="organizationStructure" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.organizationStructure"></a>
+
+```typescript
+public readonly organizationStructure: {[ key: string ]: OrganizationalUnit};
+```
+
+- *Type:* {[ key: string ]: <a href="#advanced-cdk-constructs.OrganizationalUnit">OrganizationalUnit</a>}
+- *Default:* AWS best practices organizational structure
+
+Custom organizational structure. If not provided, defaults to AWS best practices structure.
+
+The default structure includes:
+- Security: Security and compliance accounts
+- Infrastructure: Shared services and tooling accounts
+- Workloads: Application workloads and production accounts
+- Sandbox: Development and testing accounts
+- Suspended: Isolated accounts requiring investigation
+
+---
+
+##### `securityAuditAccountEmail`<sup>Optional</sup> <a name="securityAuditAccountEmail" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.securityAuditAccountEmail"></a>
+
+```typescript
+public readonly securityAuditAccountEmail: string;
+```
+
+- *Type:* string
+
+Email address for the security audit account.
+
+Required when securityAuditAccountId is not provided.
+
+---
+
+##### `securityAuditAccountId`<sup>Optional</sup> <a name="securityAuditAccountId" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.securityAuditAccountId"></a>
+
+```typescript
+public readonly securityAuditAccountId: string;
+```
+
+- *Type:* string
+
+AWS account ID for the security audit account.
+
+If not provided, a new account will be created using securityAuditAccountEmail.
+
+---
+
+##### `securityAuditAccountRoleName`<sup>Optional</sup> <a name="securityAuditAccountRoleName" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.securityAuditAccountRoleName"></a>
+
+```typescript
+public readonly securityAuditAccountRoleName: string;
+```
+
+- *Type:* string
+- *Default:* Uses Control Tower default role name
+
+IAM role name for the security audit account.
+
+---
+
+##### `securityAuditAccountTags`<sup>Optional</sup> <a name="securityAuditAccountTags" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.securityAuditAccountTags"></a>
+
+```typescript
+public readonly securityAuditAccountTags: CfnTag[];
+```
+
+- *Type:* aws-cdk-lib.CfnTag[]
+- *Default:* Purpose: Security Audit, Environment: Production
+
+Tags to apply to the security audit account.
+
+---
+
 ### DeclarativePolicyProps <a name="DeclarativePolicyProps" id="advanced-cdk-constructs.DeclarativePolicyProps"></a>
 
 Properties for configuring a DeclarativePolicy.
@@ -1222,6 +1655,54 @@ public readonly s3Logs: boolean;
 - *Default:* true
 
 Whether to enable S3 logs as a GuardDuty data source.
+
+---
+
+### OrganizationalUnit <a name="OrganizationalUnit" id="advanced-cdk-constructs.OrganizationalUnit"></a>
+
+Represents an organizational unit within AWS Control Tower.
+
+Organizational units (OUs) are containers for AWS accounts that help organize
+and manage accounts based on business needs, security requirements, or other criteria.
+
+#### Initializer <a name="Initializer" id="advanced-cdk-constructs.OrganizationalUnit.Initializer"></a>
+
+```typescript
+import { OrganizationalUnit } from 'advanced-cdk-constructs'
+
+const organizationalUnit: OrganizationalUnit = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#advanced-cdk-constructs.OrganizationalUnit.property.name">name</a></code> | <code>string</code> | The name of the organizational unit. |
+| <code><a href="#advanced-cdk-constructs.OrganizationalUnit.property.description">description</a></code> | <code>string</code> | Optional description of the organizational unit's purpose. |
+
+---
+
+##### `name`<sup>Required</sup> <a name="name" id="advanced-cdk-constructs.OrganizationalUnit.property.name"></a>
+
+```typescript
+public readonly name: string;
+```
+
+- *Type:* string
+
+The name of the organizational unit.
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="advanced-cdk-constructs.OrganizationalUnit.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+
+Optional description of the organizational unit's purpose.
 
 ---
 
