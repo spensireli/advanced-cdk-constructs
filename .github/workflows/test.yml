@@ -18,4 +18,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Test
+        run: npx projen build
+      - name: Test
         run: npx projen test
