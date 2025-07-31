@@ -1,4 +1,4 @@
-import { aws_controltower as controltower, Stack, aws_kms as kms } from 'aws-cdk-lib';
+import { aws_controltower as controltower, Stack, aws_kms as kms, CfnTag } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { AwsAccount } from '../aws-account/aws-account';
 
@@ -64,7 +64,7 @@ export interface ControlTowerLandingZoneProps {
      * Tags to apply to the log archive account.
      * @default - Purpose: Log Archive, Environment: Production
      */
-  readonly logArchiveAccountTags?: { key: string; value: string }[];
+  readonly logArchiveAccountTags?: CfnTag[];
   /**
      * AWS account ID for the security audit account.
      * If not provided, a new account will be created using securityAuditAccountEmail.
@@ -84,7 +84,7 @@ export interface ControlTowerLandingZoneProps {
      * Tags to apply to the security audit account.
      * @default - Purpose: Security Audit, Environment: Production
      */
-  readonly securityAuditAccountTags?: { key: string; value: string }[];
+  readonly securityAuditAccountTags?: CfnTag[];
   /**
      * Custom organizational structure. If not provided, defaults to AWS best practices structure.
      *
@@ -108,7 +108,6 @@ export interface ControlTowerLandingZoneProps {
  * and organizational structure management.
  *
  * @example
- * ```typescript
  * const landingZone = new ControlTowerLandingZone(this, 'MyLandingZone', {
  *   controlTowerStackName: 'my-control-tower',
  *   governedRegions: ['us-east-1', 'us-west-2'],
@@ -116,7 +115,6 @@ export interface ControlTowerLandingZoneProps {
  *   securityAuditAccountEmail: 'security-audit@example.com',
  *   logRetentionDays: 90,
  * });
- * ```
  */
 export class ControlTowerLandingZone extends Construct {
   /** The ARN of the Control Tower landing zone */
