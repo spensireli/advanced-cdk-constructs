@@ -1,4 +1,4 @@
-import { aws_controltower as controltower, Stack, aws_kms as kms, CfnTag } from 'aws-cdk-lib';
+import { aws_controltower as controltower, Stack, aws_kms as kms, CfnTag, aws_iam as iam } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { AwsAccount } from '../aws-account/aws-account';
 
@@ -180,13 +180,27 @@ export class ControlTowerLandingZone extends Construct {
     const logArchiveAccountId = props.logArchiveAccountId || logArchiveAccount?.accountId;
     const securityAuditAccountId = props.securityAuditAccountId || securityAuditAccount?.accountId;
 
-    const loggingKmsKey = props.loggingBucketKmsKeyArn
+    const loggingKmsKey: kms.Key | undefined = props.loggingBucketKmsKeyArn
       ? undefined
       : new kms.Key(this, 'LoggingKmsKey', {
         description: 'KMS key for Control Tower logging bucket encryption',
         enableKeyRotation: true,
         alias: 'control-tower-logging-key',
       });
+
+    if (loggingKmsKey) {
+      loggingKmsKey.addToResourcePolicy(new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        principals: [
+          new iam.ServicePrincipal('s3.amazonaws.com'),
+          new iam.ServicePrincipal('cloudtrail.amazonaws.com'),
+          new iam.ServicePrincipal('config.amazonaws.com'),
+          new iam.ServicePrincipal('controltower.amazonaws.com'),
+        ],
+        actions: ['kms:Decrypt', 'kms:GenerateDataKey'],
+        resources: ['*'],
+      }));
+    }
 
     const defaultOrganizationStructure = {
       security: {
