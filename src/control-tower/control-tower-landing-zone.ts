@@ -180,7 +180,7 @@ export class ControlTowerLandingZone extends Construct {
     const logArchiveAccountId = props.logArchiveAccountId || logArchiveAccount?.accountId;
     const securityAuditAccountId = props.securityAuditAccountId || securityAuditAccount?.accountId;
 
-    const loggingKmsKey: kms.Key | undefined = props.loggingBucketKmsKeyArn
+    const loggingKmsKey = props.loggingBucketKmsKeyArn
       ? undefined
       : new kms.Key(this, 'LoggingKmsKey', {
         description: 'KMS key for Control Tower logging bucket encryption',
@@ -250,6 +250,23 @@ export class ControlTowerLandingZone extends Construct {
       manifest: baseManifest,
       version: '3.3',
     });
+
+    // Hacky but I want to be sure the KMS key and grant exists before moving forward. 
+    if (logArchiveAccount) {
+      landingZone.node.addDependency(logArchiveAccount);
+      if (loggingKmsKey) {
+        loggingKmsKey.node.addDependency(logArchiveAccount);
+      }
+    }
+    if (securityAuditAccount) {
+      landingZone.node.addDependency(securityAuditAccount);
+      if (loggingKmsKey) {
+        loggingKmsKey.node.addDependency(securityAuditAccount);
+      }
+    }
+    if (loggingKmsKey) {
+      landingZone.node.addDependency(loggingKmsKey);
+    }
 
     this.landingZoneArn = landingZone.attrArn;
     this.landingZoneId = landingZone.attrLandingZoneIdentifier;
