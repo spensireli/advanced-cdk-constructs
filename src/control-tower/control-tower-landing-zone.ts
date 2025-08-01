@@ -180,7 +180,7 @@ export class ControlTowerLandingZone extends Construct {
     const logArchiveAccountId = props.logArchiveAccountId || logArchiveAccount?.accountId;
     const securityAuditAccountId = props.securityAuditAccountId || securityAuditAccount?.accountId;
 
-    const loggingKmsKey: kms.Key | undefined = props.loggingBucketKmsKeyArn
+    const loggingKmsKey = props.loggingBucketKmsKeyArn
       ? undefined
       : new kms.Key(this, 'LoggingKmsKey', {
         description: 'KMS key for Control Tower logging bucket encryption',
