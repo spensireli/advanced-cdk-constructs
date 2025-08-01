@@ -1,4 +1,4 @@
-import { aws_controltower as controltower, Stack, aws_kms as kms, CfnTag } from 'aws-cdk-lib';
+import { aws_controltower as controltower, Stack, aws_kms as kms, CfnTag, aws_iam as iam } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { AwsAccount } from '../aws-account/aws-account';
 
@@ -188,6 +188,20 @@ export class ControlTowerLandingZone extends Construct {
         alias: 'control-tower-logging-key',
       });
 
+    if (loggingKmsKey) {
+      loggingKmsKey.addToResourcePolicy(new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        principals: [
+          new iam.ServicePrincipal('s3.amazonaws.com'),
+          new iam.ServicePrincipal('cloudtrail.amazonaws.com'),
+          new iam.ServicePrincipal('config.amazonaws.com'),
+          new iam.ServicePrincipal('controltower.amazonaws.com'),
+        ],
+        actions: ['kms:Decrypt', 'kms:GenerateDataKey'],
+        resources: ['*'],
+      }));
+    }
+
     const defaultOrganizationStructure = {
       security: {
         name: 'Security',
@@ -236,6 +250,23 @@ export class ControlTowerLandingZone extends Construct {
       manifest: baseManifest,
       version: '3.3',
     });
+
+    // Hacky but I want to be sure the KMS key and grant exists before moving forward. 
+    if (logArchiveAccount) {
+      landingZone.node.addDependency(logArchiveAccount);
+      if (loggingKmsKey) {
+        loggingKmsKey.node.addDependency(logArchiveAccount);
+      }
+    }
+    if (securityAuditAccount) {
+      landingZone.node.addDependency(securityAuditAccount);
+      if (loggingKmsKey) {
+        loggingKmsKey.node.addDependency(securityAuditAccount);
+      }
+    }
+    if (loggingKmsKey) {
+      landingZone.node.addDependency(loggingKmsKey);
+    }
 
     this.landingZoneArn = landingZone.attrArn;
     this.landingZoneId = landingZone.attrLandingZoneIdentifier;
