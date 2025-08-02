@@ -98,6 +98,12 @@ export interface ControlTowerLandingZoneProps {
      * @default - AWS best practices organizational structure
      */
   readonly organizationStructure?: { [key: string]: OrganizationalUnit };
+  /**
+     * Whether to create the Control Tower admin role if it doesn't already exist.
+     * If false, the construct will attempt to reference an existing role with the name 'AWSControlTowerAdmin'.
+     * @default - true
+     */
+  readonly createControlTowerAdminRole?: boolean;
 }
 
 /**
@@ -127,6 +133,8 @@ export class ControlTowerLandingZone extends Construct {
   public readonly logArchiveAccountId?: string;
   /** The AWS account ID of the security audit account */
   public readonly securityAuditAccountId?: string;
+  /** The Control Tower admin role (either created or referenced) */
+  public readonly controlTowerAdminRole: iam.IRole;
 
   /**
      * Creates a new Control Tower Landing Zone.
@@ -225,6 +233,15 @@ export class ControlTowerLandingZone extends Construct {
       },
     };
 
+    const controlTowerAdminRole = props.createControlTowerAdminRole !== false
+      ? new iam.Role(this, 'ControlTowerAdminRole', {
+        roleName: 'AWSControlTowerAdmin',
+        assumedBy: new iam.ServicePrincipal('controltower.amazonaws.com'),
+        managedPolicies: [
+          iam.ManagedPolicy.fromAwsManagedPolicyName('AWSControlTowerAdmin'),
+        ],
+      })
+      : iam.Role.fromRoleName(this, 'ControlTowerAdminRole', 'AWSControlTowerAdmin');
 
     const baseManifest = {
       governedRegions: props.governedRegions ?? [Stack.of(this).region],
@@ -251,7 +268,7 @@ export class ControlTowerLandingZone extends Construct {
       version: '3.3',
     });
 
-    // Hacky but I want to be sure the KMS key and grant exists before moving forward. 
+    // Hacky but I want to be sure the KMS key and grant exists before moving forward.
     if (logArchiveAccount) {
       landingZone.node.addDependency(logArchiveAccount);
       if (loggingKmsKey) {
@@ -268,6 +285,7 @@ export class ControlTowerLandingZone extends Construct {
       landingZone.node.addDependency(loggingKmsKey);
     }
 
+    this.controlTowerAdminRole = controlTowerAdminRole;
     this.landingZoneArn = landingZone.attrArn;
     this.landingZoneId = landingZone.attrLandingZoneIdentifier;
     this.loggingKmsKeyArn = props.loggingBucketKmsKeyArn ?? loggingKmsKey?.keyArn;

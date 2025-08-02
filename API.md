@@ -343,6 +343,7 @@ Any object.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.controlTowerAdminRole">controlTowerAdminRole</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The Control Tower admin role (either created or referenced). |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.landingZoneArn">landingZoneArn</a></code> | <code>string</code> | The ARN of the Control Tower landing zone. |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.landingZoneId">landingZoneId</a></code> | <code>string</code> | The unique identifier of the Control Tower landing zone. |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZone.property.logArchiveAccountId">logArchiveAccountId</a></code> | <code>string</code> | The AWS account ID of the log archive account. |
@@ -360,6 +361,18 @@ public readonly node: Node;
 - *Type:* constructs.Node
 
 The tree node.
+
+---
+
+##### `controlTowerAdminRole`<sup>Required</sup> <a name="controlTowerAdminRole" id="advanced-cdk-constructs.ControlTowerLandingZone.property.controlTowerAdminRole"></a>
+
+```typescript
+public readonly controlTowerAdminRole: IRole;
+```
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+The Control Tower admin role (either created or referenced).
 
 ---
 
@@ -1123,6 +1136,7 @@ const controlTowerLandingZoneProps: ControlTowerLandingZoneProps = { ... }
 | --- | --- | --- |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.controlTowerStackName">controlTowerStackName</a></code> | <code>string</code> | The name of the Control Tower stack. |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.accessLoggingBucketRetentionDays">accessLoggingBucketRetentionDays</a></code> | <code>number</code> | Number of days to retain access logs in the access logging bucket. |
+| <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.createControlTowerAdminRole">createControlTowerAdminRole</a></code> | <code>boolean</code> | Whether to create the Control Tower admin role if it doesn't already exist. |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.governedRegions">governedRegions</a></code> | <code>string[]</code> | AWS regions where Control Tower governance will be applied. |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountEmail">logArchiveAccountEmail</a></code> | <code>string</code> | Email address for the log archive account. |
 | <code><a href="#advanced-cdk-constructs.ControlTowerLandingZoneProps.property.logArchiveAccountId">logArchiveAccountId</a></code> | <code>string</code> | AWS account ID for the log archive account. |
@@ -1160,6 +1174,21 @@ public readonly accessLoggingBucketRetentionDays: number;
 - *Default:* 60 days
 
 Number of days to retain access logs in the access logging bucket.
+
+---
+
+##### `createControlTowerAdminRole`<sup>Optional</sup> <a name="createControlTowerAdminRole" id="advanced-cdk-constructs.ControlTowerLandingZoneProps.property.createControlTowerAdminRole"></a>
+
+```typescript
+public readonly createControlTowerAdminRole: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true
+
+Whether to create the Control Tower admin role if it doesn't already exist.
+
+If false, the construct will attempt to reference an existing role with the name 'AWSControlTowerAdmin'.
 
 ---
 
