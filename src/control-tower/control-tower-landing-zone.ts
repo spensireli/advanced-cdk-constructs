@@ -238,7 +238,7 @@ export class ControlTowerLandingZone extends Construct {
         roleName: 'AWSControlTowerAdmin',
         assumedBy: new iam.ServicePrincipal('controltower.amazonaws.com'),
         managedPolicies: [
-          iam.ManagedPolicy.fromAwsManagedPolicyName('AWSControlTowerAdmin'),
+          iam.ManagedPolicy.fromAwsManagedPolicyName('AWSControlTowerServiceRolePolicy'),
         ],
       })
       : iam.Role.fromRoleName(this, 'ControlTowerAdminRole', 'AWSControlTowerAdmin');
