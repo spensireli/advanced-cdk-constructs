@@ -285,6 +285,9 @@ export class ControlTowerLandingZone extends Construct {
       landingZone.node.addDependency(loggingKmsKey);
     }
 
+    // Ensure the Control Tower admin role exists before creating the landing zone
+    landingZone.node.addDependency(controlTowerAdminRole);
+
     this.controlTowerAdminRole = controlTowerAdminRole;
     this.landingZoneArn = landingZone.attrArn;
     this.landingZoneId = landingZone.attrLandingZoneIdentifier;
